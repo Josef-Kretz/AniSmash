@@ -1,4 +1,5 @@
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import {useState} from 'react'
 import AnimeViewer from './components/AnimeViewer'
 import Header from './components/Header'

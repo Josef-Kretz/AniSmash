@@ -12,12 +12,12 @@ const AnimeViewer = ({anime}) => {
         console.log('data', data)
         setVids(data)
     }
-    test()
+    //test()
    }, [])
 
     return <>
         <h2>Anime Name</h2>
-        <iframe src={vids.yUrl} />
+        <iframe  />
         <p>Anime Description</p>
         <SmashButton />
         <PassButton />
