@@ -15,6 +15,8 @@ connectDB()
 
 const app = express()
 app.use(cors())
+app.use(express.urlencoded({ extended: true}))
+app.use(express.json())
 
 // Setup Sessions - stored in MongoDB
 app.use(
@@ -26,7 +28,7 @@ app.use(
     })
   );
 
-//app.use('/', mainRoutes)
+app.use('/', mainRoutes)
 app.use('/api', apiRoutes)
 
 app.listen(process.env.PORT, () => {

@@ -64,7 +64,8 @@ exports.getSignup = (req, res) => {
 };
 
 exports.postSignup = (req, res, next) => {
-  const validationErrors = [];
+  console.log(req.body)
+  /*const validationErrors = [];
   if (!validator.isEmail(req.body.email))
     validationErrors.push({ msg: "Please enter a valid email address." });
   if (!validator.isLength(req.body.password, { min: 8 }))
@@ -112,5 +113,5 @@ exports.postSignup = (req, res, next) => {
         });
       });
     }
-  );
+  );*/
 };

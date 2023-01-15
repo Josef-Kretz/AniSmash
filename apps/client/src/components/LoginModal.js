@@ -27,7 +27,7 @@ const LoginModal = () => {
                 <Button onClick={handleClose}>X</Button>
             </Modal.Header>
             <Modal.Body>
-                <Form onSubmit={onSubmit}>
+                <Form action='http://localhost:2121/login' method='post'>
                     <Form.Group controlId='loginEmail'>
                         <Form.Label>Email Address</Form.Label>
                         <Form.Control type='email' placeholder='Enter your email' />
