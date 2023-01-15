@@ -2,19 +2,43 @@ import React, {useState} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import CustomAlert from './CustomAlert'
+import LinkSaver from './LinkSaver'
 
 
 const LoginModal = () => {
     const [show, setShow] = useState(false)
+    const [alerts, setAlerts] = useState({variant: '', msgs: []})
 
     const handleClose = () => setShow(false)
-    const handleShow = () => setShow(true)
+    const handleShow = () => {
+        setAlerts({variant: '', msgs: []})
+        setShow(true)
+    }
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
         const email = e.target.elements.loginEmail.value
         const pw = e.target.elements.loginPassword.value
         console.log(email, pw)
+        const res = await fetch(LinkSaver.loginLink, {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json'
+            },
+            body: JSON.stringify({email: email, password: pw})
+        })
+
+        const data = await res.json()
+        console.log(data)
+        
+        if(data.isError === true){
+            setAlerts({variant: 'warning', msgs : data.msgs})
+        }
+        else{
+            setAlerts({variant: 'success', msgs: data.msgs})
+            //auto close after successful login?
+        }
     }
 
     return ( <>
@@ -26,8 +50,9 @@ const LoginModal = () => {
                 <Modal.Title>Login</Modal.Title>
                 <Button onClick={handleClose}>X</Button>
             </Modal.Header>
+            <CustomAlert alerts={alerts} setAlerts={setAlerts} />
             <Modal.Body>
-                <Form action='http://localhost:2121/login' method='post'>
+                <Form onSubmit={onSubmit}>
                     <Form.Group controlId='loginEmail'>
                         <Form.Label>Email Address</Form.Label>
                         <Form.Control type='email' placeholder='Enter your email' />
