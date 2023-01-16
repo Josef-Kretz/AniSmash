@@ -20,7 +20,7 @@ const LoginModal = () => {
         e.preventDefault()
         const email = e.target.elements.loginEmail.value
         const pw = e.target.elements.loginPassword.value
-        console.log(email, pw)
+
         const res = await fetch(LinkSaver.loginLink, {
             method: 'POST',
             headers: {

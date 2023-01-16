@@ -2,8 +2,13 @@ const SmashButton = () => {
     //user presses button for anime they like
     //use form submission
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
+
+        const res = await fetch('http://localhost:2121/check')
+        const data = await res.json()
+
+        console.log(data)
     }
 
     return (

@@ -1,5 +1,4 @@
 const express = require('express')
-const cors = require('cors')
 const mongoose = require('mongoose')
 const passport = require('passport')
 const session = require('express-session')
@@ -16,10 +15,8 @@ require('../config/passport')(passport)
 connectDB()
 
 const app = express()
-app.use(cors())
 app.use(express.urlencoded({ extended: true}))
 app.use(express.json())
-
 
 // Setup Sessions - stored in MongoDB
 app.use(
@@ -27,7 +24,7 @@ app.use(
         secret: "keyboard cat",
         resave: false,
         saveUninitialized: false,
-        store: MongoStore.create({mongoUrl : process.env.DBSTRING})
+        store: MongoStore.create(mongoose.connection),
     })
   );
 
