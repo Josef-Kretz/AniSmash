@@ -30,7 +30,6 @@ const LoginModal = () => {
         })
 
         const data = await res.json()
-        console.log(data)
         
         if(data.isError === true){
             setAlerts({variant: 'warning', msgs : data.msgs})

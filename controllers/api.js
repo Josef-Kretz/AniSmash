@@ -5,7 +5,7 @@ module.exports = {
         })
     },
     checkUser : (req, res) => {
-        console.log(req.session)
-        res.status(200).json('checkuser called')
+        console.log(req.user)
+        res.status(200).json("i'm trying")
     }
 }

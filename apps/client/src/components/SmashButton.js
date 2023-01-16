@@ -5,7 +5,7 @@ const SmashButton = () => {
     const onSubmit = async (e) => {
         e.preventDefault()
 
-        const res = await fetch('http://localhost:2121/check')
+        const res = await fetch('/check')
         const data = await res.json()
 
         console.log(data)
