@@ -5,11 +5,13 @@ const passport = require('passport')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')
 const connectDB = require('../config/database')
+const flash = require('express-flash')
 
 const mainRoutes = require('../routes/main')
 const apiRoutes = require('../routes/api')
 
 require('dotenv').config({path: './config/.env'})
+require('../config/passport')(passport)
 
 connectDB()
 
@@ -17,6 +19,7 @@ const app = express()
 app.use(cors())
 app.use(express.urlencoded({ extended: true}))
 app.use(express.json())
+
 
 // Setup Sessions - stored in MongoDB
 app.use(
@@ -27,6 +30,11 @@ app.use(
         store: MongoStore.create({mongoUrl : process.env.DBSTRING})
     })
   );
+
+app.use(passport.initialize())
+app.use(passport.session())
+
+app.use(flash())
 
 app.use('/', mainRoutes)
 app.use('/api', apiRoutes)
