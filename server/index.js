@@ -21,10 +21,15 @@ app.use(express.json())
 // Setup Sessions - stored in MongoDB
 app.use(
     session({
-        secret: "keyboard cat",
+        secret: "AroUNd ThE worLD aRoUNd The wOrld aRound the WORLD AROUND tHE WOrld aRounD The world ArOuNd the WOrld aROuND THe wOrLd aROuNd thE worlD AroUnD the wOrLD aROund tHE wORlD ",
         resave: false,
         saveUninitialized: false,
         store: MongoStore.create(mongoose.connection),
+        //enable before pushing to production
+        // cookie: {
+        //     sameSite: 'none',
+        //     secure: true
+        // }
     })
   );
 

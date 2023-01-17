@@ -5,7 +5,7 @@ module.exports = {
         })
     },
     checkUser : (req, res) => {
-        console.log(req.user)
-        res.status(200).json("i'm trying")
+        if(req.isAuthenticated()) return res.status(200).json(true)
+        return res.status(200).json(false)
     }
 }

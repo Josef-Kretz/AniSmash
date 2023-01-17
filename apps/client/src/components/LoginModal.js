@@ -6,7 +6,7 @@ import CustomAlert from './CustomAlert'
 import LinkSaver from './LinkSaver'
 
 
-const LoginModal = () => {
+const LoginModal = ({setLoggedIn}) => {
     const [show, setShow] = useState(false)
     const [alerts, setAlerts] = useState({variant: '', msgs: []})
 
@@ -36,6 +36,7 @@ const LoginModal = () => {
         }
         else{
             setAlerts({variant: 'success', msgs: data.msgs})
+            setLoggedIn(true)
             //auto close after successful login?
         }
     }

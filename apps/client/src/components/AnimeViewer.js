@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react'
 import SmashButton from './SmashButton'
 import PassButton from './PassButton'
 
-const AnimeViewer = ({anime}) => {
+const AnimeViewer = ({anime, setLoggedIn}) => {
     const [vids, setVids] = useState('')
    useEffect(() => {
     async function test() {
@@ -20,7 +20,7 @@ const AnimeViewer = ({anime}) => {
         <iframe  />
         <p>Anime Description</p>
         <SmashButton />
-        <PassButton />
+        <PassButton setLoggedIn={setLoggedIn} />
     </>
 }
 

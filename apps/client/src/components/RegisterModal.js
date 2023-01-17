@@ -6,7 +6,7 @@ import CustomAlert from './CustomAlert'
 import LinkSaver from './LinkSaver'
 
 
-const RegisterModal = () => {
+const RegisterModal = ({setLoggedIn}) => {
     const [show, setShow] = useState(false)
     const [alerts, setAlerts] = useState({variant: '', msgs: []})
 
@@ -37,6 +37,7 @@ const RegisterModal = () => {
         }
         else{
             setAlerts({variant: 'success', msgs: data.msgs})
+            setLoggedIn(true)
             //auto close after successful registration?
         }
     }
