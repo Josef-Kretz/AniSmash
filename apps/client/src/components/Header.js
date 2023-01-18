@@ -1,10 +1,11 @@
 //react components
 import LoginModal from './LoginModal'
 import RegisterModal from './RegisterModal'
-//npm components
+//npm modules
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
+import {LinkContainer} from 'react-router-bootstrap'
 
 
 const Header = ({title, loggedIn, setLoggedIn}) => {
@@ -35,10 +36,10 @@ const Header = ({title, loggedIn, setLoggedIn}) => {
         if(loggedIn){
             return (
                 <Nav>
-                    <Nav.Link>Anime Viewer</Nav.Link>
-                    <Nav.Link>Collections</Nav.Link>
+                    <LinkContainer to="anime"><Nav.Link>Anime</Nav.Link></LinkContainer>
+                    <LinkContainer to="library"><Nav.Link>Library</Nav.Link></LinkContainer>
                     <NavDropdown title="Profile" id="basic-nav-dropdown">
-                        <NavDropdown.Item href="">Profile</NavDropdown.Item>
+                        <LinkContainer to="profile"><NavDropdown.Item href="">Profile</NavDropdown.Item></LinkContainer>
                         <NavDropdown.Divider />
                         <NavDropdown.Item onClick={logout}>Log Out</NavDropdown.Item>
                     </NavDropdown>
