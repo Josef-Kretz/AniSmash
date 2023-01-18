@@ -3,7 +3,7 @@ import LoginModal from './LoginModal'
 import RegisterModal from './RegisterModal'
 //npm components
 import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/NavBar'
+import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 
 
