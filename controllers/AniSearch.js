@@ -108,22 +108,69 @@ const AniSearch = {
             return {isError: true, err}
           }
     },
-    findTrending : async () => {
-        const url = `{
+    findTrending : async (likes, notLikes) => {
+        const fetch = require('node-fetch')
+        const ignoreIDs = [...likes, ...notLikes] //so user can swipe on new/trending content
+        const query = `{
             Page(page:1, perPage:10)
             {
-              media(type: ANIME, format_in:[TV,MOVIE, ONA],sort:TRENDING_DESC)
+              media(id_not_in:[${[...ignoreIDs]}],type: ANIME, format_in:[TV,MOVIE, ONA],sort:TRENDING_DESC, isAdult:false)
               {
                 id
+                idMal
                 title
                 {
                   english
                   romaji
                 }
-                
+                trailer {
+                    id
+                    site
+                    thumbnail
+                  }
+                  coverImage {
+                    extraLarge
+                    large
+                    medium
+                    color
+                  }
+                  averageScore
+                  description
+                  genres
+                  tags {
+                    id
+                    category
+                    description
+                  }
+                  externalLinks{
+                    site
+                    url
+                  }
+                  isAdult
               }
             }
           }`
+
+          const url = `https://graphql.anilist.co`
+          const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+                query: query
+            })
+          }
+          try{
+            const res = await fetch(url, options)
+            const data = await res.json()
+            data.isError = false
+
+            return data
+          }catch(err){
+            return {isError: true, data: err}
+          }
     }
 }
 

@@ -4,6 +4,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import Root from '../routes/root'
 import ErrorPage from '../error-page'
 import Anime from '../Anime'
+import AnimePage, {loader as animeLoader} from './animePage'
 
 const router = createBrowserRouter([
     {
@@ -14,6 +15,11 @@ const router = createBrowserRouter([
         {
           path: "anime",
           element: <Anime />
+        },
+        {
+          path:"library/:animeId",
+          element: <AnimePage />,
+          loader: animeLoader
         }
       ]
     }
