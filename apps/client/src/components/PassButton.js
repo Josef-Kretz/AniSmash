@@ -1,10 +1,10 @@
-const PassButton = ({vids, setVids}) => {
+const PassButton = ({incrementVid}) => {
     //user clicks button for anime they do not like
     //use form submission
 
     const onSubmit = (e) => {
         e.preventDefault()
-        setVids(vids.slice(1))
+        incrementVid()
     }
 
     return (
