@@ -108,7 +108,7 @@ const AniSearch = {
             return {isError: true, err}
           }
     },
-    findTrending : async (likes, notLikes) => {
+    findTrending : async (likes=[], notLikes=[]) => {
         const fetch = require('node-fetch')
         const ignoreIDs = [...likes, ...notLikes] //so user can swipe on new/trending content
         const query = `{

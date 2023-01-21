@@ -1,10 +1,10 @@
-const PassButton = ({setLoggedIn}) => {
+const PassButton = ({vids, setVids}) => {
     //user clicks button for anime they do not like
     //use form submission
 
     const onSubmit = (e) => {
         e.preventDefault()
-        setLoggedIn(true) //temporary
+        setVids(vids.slice(1))
     }
 
     return (

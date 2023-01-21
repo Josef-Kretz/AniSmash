@@ -3,25 +3,31 @@ import SmashButton from './components/SmashButton'
 import PassButton from './components/PassButton'
 
 const Anime = ({anime, setLoggedIn}) => {
-    const [vids, setVids] = useState('')
+    const [vids, setVids] = useState([])
+
    useEffect(() => {
     async function test() {
-        let res = await fetch('http://localhost:2121/api/trailer')
+        let res = await fetch('/api/trailer')
         let data = await res.json()
 
-        console.log('data', data)
-        setVids(data)
+        if(data.isError) return
+        console.log(data)
+        setVids(data.data.Page.media)
     }
-    //test()
+    test()
    }, [])
 
-    return <>
-        <h2>Anime Name</h2>
-        <iframe  />
-        <p>Anime Description</p>
+    if(vids.length){
+        return <>
+        <h1>{vids[0].title.english ? vids[0].title.english : vids[0].title.romaji}</h1>
+        <iframe src={vids[0].trailer.id ? 'https://youtube.com/embed/'+vids[0].trailer.id : 'https://youtu.be/jfKfPfyJRdk'} />
+        <p>{vids[0].description}</p>
         <SmashButton />
-        <PassButton setLoggedIn={setLoggedIn} />
+        <PassButton vids={vids} setVids={setVids} />
     </>
+    }
+
+    return <h1>Loading</h1>
 }
 
 export default Anime
