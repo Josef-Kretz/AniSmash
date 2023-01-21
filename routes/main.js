@@ -9,6 +9,7 @@ router.post('/logout', authController.logout)
 router.post('/signup', authController.postSignup)
 
 router.post('/like', mainController.addLike)
+router.post('/hate', mainController.hate)
 
 router.get('/check', apiController.checkUser)
 

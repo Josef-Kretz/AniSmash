@@ -3,40 +3,53 @@ import SmashButton from './components/SmashButton'
 import PassButton from './components/PassButton'
 
 const Anime = ({anime, setLoggedIn}) => {
+    //stores array of anime info
     const [vids, setVids] = useState([])
+    //stores current video trailer link, needs vids then fetches from jikan(MAL)
     const [trailer, setTrailer] = useState('')
+    //triggers use effect when nextvid is true
     const [nextVid, setNextVid] = useState(false)
 
     const incrementVid = () => setNextVid(true)
 
    useEffect(()=>{
     const grabAnimes = async () => {
-        let res = await fetch('/api/trailer')
-        let data = await res.json()
+        console.log('requested more animes!')
+        try{
+            let res = await fetch('/api/trailer')
+            let data = await res.json()
 
-        if(data.isError) return
-        
-        setVids(data.data.Page.media)
+            if(data.isError) return //replace with throw error afterwards
+            
+            setVids(data.data.Page.media)
+        }catch(err){
+            //replace with throw error afterwards
+            console.log(err)
+        }}
 
-        return data.data.Page.media[0].idMal
-    }
 
         if(vids.length > 1) setVids(vids.slice(1))
-        else{
-            grabAnimes()
-        }
+        else    grabAnimes()
 
         setNextVid(false)
-   }, [nextVid])
+    
+    }, [nextVid])
 
    useEffect(() => {
     const grabTrailer = async () => {
-        let res = await fetch(`https://api.jikan.moe/v4/anime/${vids[0].idMal}/videos`)
-        let data = await res.json()
+        try{
+            let res = await fetch(`https://api.jikan.moe/v4/anime/${vids[0].idMal}/videos`)
+            let data = await res.json()
         
-        setTrailer(data.data.promo[0].trailer.embed_url)
+            setTrailer(data.data.promo[0].trailer.embed_url)
+        }catch(err){
+            //replace with throw error afterwards
+            console.log(err)
+        }
+        
     }
         if(vids[0]) grabTrailer()
+
    }, [vids[0]])
 
     if(vids.length){

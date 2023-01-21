@@ -8,7 +8,7 @@ const api = {
         const AniSearch = require('./AniSearch')
         const user = await User.find({user: req.user})
 
-        const data = await AniSearch.findTrending(user.likes, user.notLikes)
+        const data = await AniSearch.findTrending(user[0].likes, user[0].notLikes)
         if(data.isError) return res.status(500).json('Error retrieving data from Animes Databases')
         return res.status(200).json(data)
     },
@@ -23,11 +23,10 @@ const api = {
         return res.status(200).json(data)
     },
     trending: async(req, res) => {
-        const likes = [] //update to grab from db later
-        const notLikes = [] //update to grab from db later
-
         const AniSearch = require('./AniSearch')
-        const data = await AniSearch.findTrending(likes, notLikes)
+        const user = await User.find({user: req.user})
+
+        const data = await AniSearch.findTrending(user[0].likes, user[0].notLikes)
         if(data.isError === true) return res.status(500).json('Error retrieving data from Animes Databases')
         return res.status(200).json(data)
     }

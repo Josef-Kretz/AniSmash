@@ -2,14 +2,27 @@ const SmashButton = ({incrementVid, animeId}) => {
     //user presses button for anime they like
     //use form submission
 
-    const addLike = () => {
+    const addLike = async (animeId) => {
+        if(!animeId || !(+animeId)) return
+
+        const options = {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({animeId: +animeId})
+        }
+
+        const res = await fetch('/like', options)
+        const data = await res.json()
         
     }
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        console.log(animeId)
-        //incrementVid()
+
+        addLike(animeId)
+        incrementVid()
     }
 
     return (
