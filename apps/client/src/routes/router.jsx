@@ -8,7 +8,7 @@ import AnimePage, {loader as animeLoader} from './animePage'
 
 const router = createBrowserRouter([
     {
-      path:"/page",
+      path:"/",
       element: <Root />,
       errorElement: <ErrorPage />,
       children: [
