@@ -14,7 +14,7 @@ const Anime = ({anime, setLoggedIn}) => {
 
    useEffect(()=>{
     const grabAnimes = async () => {
-        console.log('requested more animes!')
+        
         try{
             let res = await fetch('/api/trailer')
             let data = await res.json()

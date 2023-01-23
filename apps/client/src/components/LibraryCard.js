@@ -1,8 +1,7 @@
 
 const LibraryCard = ({anime}) => {
-    //const {id, title:{english, romaji}, coverImage:{medium}, description} = anime
-    //console.log(`id ${id}, title ${english}${romaji}, coverimage ${medium} description ${description}`)
-    console.log(anime)
+    const {id, title:{english, romaji}, coverImage:{medium}, description} = anime
+
     return <h1>id</h1>
 }
 

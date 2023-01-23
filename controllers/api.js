@@ -35,7 +35,6 @@ const api = {
         const user = await User.find({user: req.user})
         const data = await AniSearch.getList(user[0].likes)
 
-        if(data.isError === true) return res.status(500).json('Error retrieving data')
         return res.status(200).json(data)
     }
 }

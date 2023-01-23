@@ -111,11 +111,11 @@ const AniSearch = {
     findTrending : async (likes=[], notLikes=[]) => {
         const fetch = require('node-fetch')
         const ignoreIDs = [...likes, ...notLikes] //so user can swipe on new/trending content
-        console.log(ignoreIDs)
+
         const query = `{
             Page(page:1, perPage:10)
             {
-              media(id_not_in:${ignoreIDs},type: ANIME, format_in:[TV,MOVIE, ONA],sort:TRENDING_DESC, isAdult:false)
+              media(id_not_in:[${ignoreIDs}],type: ANIME, format_in:[TV,MOVIE, ONA],sort:TRENDING_DESC, isAdult:false)
               {
                 id
                 idMal
@@ -167,7 +167,7 @@ const AniSearch = {
             const res = await fetch(url, options)
             const data = await res.json()
             data.isError = false
-            console.log(data)
+            
             return data
           }catch(err){
             return {isError: true, data: err}
@@ -178,7 +178,7 @@ const AniSearch = {
         const query = `{
             Page(page:1, perPage:10)
             {
-              media(id_in:${animeList},type: ANIME, format_in:[TV,MOVIE, ONA],sort:TRENDING_DESC, isAdult:false)
+              media(id_in:[${animeList}],type: ANIME, format_in:[TV,MOVIE, ONA],sort:TRENDING_DESC, isAdult:false)
               {
                 id
                 idMal
@@ -229,9 +229,8 @@ const AniSearch = {
           try{
             const res = await fetch(url, options)
             const data = await res.json()
-            data.isError = false
 
-            return data
+            return data.data.Page.media
           }catch(err){
             return {isError: true, data: err}
           }

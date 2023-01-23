@@ -4,15 +4,15 @@ import LibraryCard from './components/LibraryCard'
 
 export async function loader(){
     try{
-        console.log('test')
-        const res = await fetch('/api/getLibrary')
+        const res = await fetch('/api/getlibrary')
         const data = await res.json()
 
-        return data.likes
+        return data
     }catch(err){
         //replace with throw afterwards
         console.log(err)
     }
+
 }
 
 const Library = () => {
