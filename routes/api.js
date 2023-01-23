@@ -5,5 +5,6 @@ const apiController = require('../controllers/api')
 router.get('/trailer', apiController.getTrailer)
 router.get('/rec', apiController.rec)
 router.get('/trending', apiController.trending)
+router.get('/getLibrary', apiController.getLibrary)
 
 module.exports = router

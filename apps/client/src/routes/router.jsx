@@ -5,6 +5,7 @@ import Root from '../routes/root'
 import ErrorPage from '../error-page'
 import Anime from '../Anime'
 import AnimePage, {loader as animeLoader} from './animePage'
+import Library, {loader as libraryLoader} from '../Library'
 
 const router = createBrowserRouter([
     {
@@ -15,6 +16,11 @@ const router = createBrowserRouter([
         {
           path: "anime",
           element: <Anime />
+        },
+        {
+          path: "library",
+          element: <Library />,
+          loader: libraryLoader
         },
         {
           path:"library/:animeId",
