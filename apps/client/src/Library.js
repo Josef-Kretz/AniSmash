@@ -17,9 +17,10 @@ export async function loader(){
 
 const Library = () => {
     const animeLikes = useLoaderData()
-    
+    //future: limit library to 10-20 items per page (server side)
+    //change library/:id to modals display info, use :id to change pages(params sent to server to select section of library)
 
-    return animeLikes.map(anime => <LibraryCard anime={anime} />)
+    return animeLikes.map(anime => <LibraryCard anime={anime} key={anime.id} />)
 }
 
 export default Library
