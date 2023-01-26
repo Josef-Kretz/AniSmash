@@ -1,6 +1,9 @@
 import {useState, useEffect} from 'react'
 import {useLoaderData} from 'react-router-dom'
+import CardGroup from 'react-bootstrap/CardGroup'
+
 import LibraryCard from './components/LibraryCard'
+import useInfiniteScroll from './components/useInfiniteScroll'
 
 export async function loader(){
     try{
@@ -16,11 +19,31 @@ export async function loader(){
 }
 
 const Library = () => {
-    const animeLikes = useLoaderData()
-    //future: limit library to 10-20 items per page (server side)
-    //change library/:id to modals display info, use :id to change pages(params sent to server to select section of library)
+    const [animeLikes, setAnimeLikes] = useState([...useLoaderData()])
+    const [isFetching, setIsFetching] = useInfiniteScroll(loadMoreAnime)
+    const [reqsSent, setReqsSent] = useState(1)
 
-    return animeLikes.map(anime => <LibraryCard anime={anime} key={anime.id} />)
+    async function loadMoreAnime() {
+        let reqs = reqsSent*12
+        let dbAnime = animeLikes.length+12
+        if(reqs > dbAnime) return
+
+        const res = await fetch(`/api/getlibrary/${reqsSent}`)
+        const data = await res.json()
+        console.log('request for more anime sent', data.length)
+        let filteredList = [...animeLikes, ...data].filter((obj, ind, arr)=> {
+            let id = obj.id
+            return arr.findIndex((objs) => id === objs.id) === ind
+        })
+
+        setAnimeLikes(filteredList)
+        setIsFetching(false)
+        setReqsSent(reqsSent+1)
+    }
+    //use infinite scroll
+    //group with card groups/grid
+
+    return <section className='librarySection'>{animeLikes.map(anime => <LibraryCard anime={anime} key={anime.id} />)}</section>
 }
 
 export default Library

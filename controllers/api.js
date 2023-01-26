@@ -28,12 +28,22 @@ const api = {
 
         const data = await AniSearch.findTrending(user[0].likes, user[0].notLikes)
         if(data.isError === true) return res.status(500).json('Error retrieving data from Animes Databases')
+
         return res.status(200).json(data)
     },
     getLibrary: async (req, res) => {
         const AniSearch = require('./AniSearch')
         const user = await User.find({user: req.user})
-        const data = await AniSearch.getList(user[0].likes)
+
+        const length = user[0].likes.length
+        //ensure param positive int
+        let num = req.params.num
+        num = Number.isNaN(+num) ? 0 : +num
+        //start index for search
+        num *= 12
+
+        const likes = user[0].likes.slice(num, num+12)
+        const data = await AniSearch.getList(likes)
 
         return res.status(200).json(data)
     }

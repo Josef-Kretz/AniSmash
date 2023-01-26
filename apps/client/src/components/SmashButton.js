@@ -2,7 +2,7 @@ const SmashButton = ({incrementVid, animeId}) => {
     //user presses button for anime they like
     //use form submission
 
-    const addLike = async (animeId) => {
+    const addLike = async () => {
         if(!animeId || !(+animeId)) return
 
         const options = {
@@ -21,7 +21,7 @@ const SmashButton = ({incrementVid, animeId}) => {
     const onSubmit = async (e) => {
         e.preventDefault()
 
-        addLike(animeId)
+        addLike()
         incrementVid()
     }
 

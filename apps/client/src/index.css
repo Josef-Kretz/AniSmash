@@ -1,0 +1,10 @@
+.librarySection{
+    overflow-y: auto;
+    display: flex;
+    flex-flow: wrap row;
+}
+
+.librarySection > .libraryCard{
+    width: 250px;
+
+}

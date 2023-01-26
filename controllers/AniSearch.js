@@ -137,6 +137,7 @@ const AniSearch = {
                   }
                   averageScore
                   description
+                  bannerImage
                   genres
                   tags {
                     id
@@ -176,7 +177,7 @@ const AniSearch = {
     getList : async (animeList=[]) => {
       const fetch = require('node-fetch')
         const query = `{
-            Page(page:1, perPage:10)
+            Page(page:1, perPage:12)
             {
               media(id_in:[${animeList}],type: ANIME, format_in:[TV,MOVIE, ONA],sort:TRENDING_DESC, isAdult:false)
               {
@@ -200,6 +201,7 @@ const AniSearch = {
                   }
                   averageScore
                   description
+                  bannerImage
                   genres
                   tags {
                     id
