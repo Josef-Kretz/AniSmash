@@ -6,7 +6,8 @@ const Anime = ({anime, setLoggedIn}) => {
     //stores array of anime info
     const [vids, setVids] = useState([])
     //stores current video trailer link, needs vids then fetches from jikan(MAL)
-    const [trailer, setTrailer] = useState('')
+    const [trailer, setTrailer] = useState([])
+    const [nextTrailer, setNextTrailer] = useState(0)
     //triggers use effect when nextvid is true
     const [nextVid, setNextVid] = useState(false)
 
@@ -42,14 +43,16 @@ const Anime = ({anime, setLoggedIn}) => {
    useEffect(() => {
     const grabTrailer = async () => {
         try{
+            setNextTrailer(0)
             let res = await fetch(`https://api.jikan.moe/v4/anime/${vids[0].idMal}/videos`)
             let data = await res.json()
 
             if(!data.data.promo.length){
-                setTrailer('')
+                setTrailer([])
                 return
             }
-            setTrailer(data.data.promo[0].trailer.embed_url||'')
+            const trailers = data.data.promo.map(trail => trail.trailer.embed_url)
+            setTrailer(trailers)
         }catch(err){
             //replace with throw error afterwards
             console.log(err)
@@ -59,18 +62,21 @@ const Anime = ({anime, setLoggedIn}) => {
         if(vids[0]) grabTrailer()
 
    }, [vids[0]])
-
+//change buttons to carousel?
     if(vids.length){
-        return <>
-        <h1>{vids[0].title.english ? vids[0].title.english : vids[0].title.romaji}</h1>
-        {
-            trailer ? <iframe src={trailer} /> 
-            : <img src={vids[0].bannerImage} />
-        }
+        return <section>
+            <h1>{vids[0].title.english ? vids[0].title.english : vids[0].title.romaji}</h1>
+            <section className='videoContainer'>
+                <button>&#8610;</button>
+                <span></span>
+                <button>&#8611;</button>
+                <iframe src={trailer[nextTrailer]||''} />
+            </section>
+        <img src={vids[0].bannerImage || ''} />
         <p>{vids[0].description}</p>
         <SmashButton incrementVid={incrementVid} animeId={vids[0].id} />
         <PassButton incrementVid={incrementVid} animeId={vids[0].id} />
-    </>
+    </section>
     }
 
     return <h1>Loading</h1>
