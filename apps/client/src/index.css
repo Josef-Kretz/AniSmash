@@ -9,6 +9,44 @@
 
 }
 
+.animeBanner {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+.animeDesc{
+    width: 80%;
+    background-color: rbga(255,255,255, 0.4);
+}
+
 .trailerCarousel {
     text-align:center;
+    max-width:700px;
+    height:400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0, 0.6)
+}
+
+.trailerItem {
+    height:100%;
+    width:100%;
+}
+
+div.carousel-inner{
+    height: 80%;
+    width: 80%;
+}
+
+.carousel-item{
+    height: 100%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon,
+.carousel-indicators > button {
+    filter: invert(1);
 }

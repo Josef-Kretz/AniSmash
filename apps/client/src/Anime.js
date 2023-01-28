@@ -19,9 +19,9 @@ const Anime = ({anime, setLoggedIn}) => {
         if(trailer)
         {    return <Carousel className='trailerCarousel' interval={null}>
                 {trailer.map(vid => {
-                    const key = vid.match(/[^\/]+$/)[0]
-                    return <Carousel.Item>
-                        <iframe src={vid} key={key} className="trailerItem" alt="a fabulous anime trailer that will change your world" />
+                    const key = vid.match(/\/(?<key>[\w]+)\?/).groups.key
+                    return <Carousel.Item key={key||vid}>
+                        <iframe src={vid} className="trailerItem" alt="a fabulous anime trailer that will change your world" />
                     </Carousel.Item>
                 })}
             </Carousel>
@@ -77,13 +77,16 @@ const Anime = ({anime, setLoggedIn}) => {
         if(vids[0]) grabTrailer()
 
    }, [vids[0]])
-//change buttons to carousel?
+
     if(vids.length){
         return <section>
+            <section>
+            <img className='animeBanner' src={vids[0].bannerImage || ''} />
             <h1>{vids[0].title.english ? vids[0].title.english : vids[0].title.romaji}</h1>
+            {/* add tags/genres here */}
+            </section>
             {loadCarousel()}
-        <img src={vids[0].bannerImage || ''} />
-        <p>{vids[0].description}</p>
+        <p className='animeDesc'>{vids[0].description}</p> 
         <SmashButton incrementVid={incrementVid} animeId={vids[0].id} />
         <PassButton incrementVid={incrementVid} animeId={vids[0].id} />
     </section>
