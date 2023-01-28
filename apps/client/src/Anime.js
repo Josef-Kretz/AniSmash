@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react'
+import Carousel from 'react-bootstrap/Carousel'
 import SmashButton from './components/SmashButton'
 import PassButton from './components/PassButton'
 
@@ -12,6 +13,20 @@ const Anime = ({anime, setLoggedIn}) => {
     const [nextVid, setNextVid] = useState(false)
 
     const incrementVid = () => setNextVid(!nextVid)
+
+    const loadCarousel = () => {
+
+        if(trailer)
+        {    return <Carousel className='trailerCarousel' interval={null}>
+                {trailer.map(vid => {
+                    const key = vid.match(/[^\/]+$/)[0]
+                    return <Carousel.Item>
+                        <iframe src={vid} key={key} className="trailerItem" alt="a fabulous anime trailer that will change your world" />
+                    </Carousel.Item>
+                })}
+            </Carousel>
+            }
+    }
 
    useEffect(()=>{
     const grabAnimes = async () => {
@@ -66,12 +81,7 @@ const Anime = ({anime, setLoggedIn}) => {
     if(vids.length){
         return <section>
             <h1>{vids[0].title.english ? vids[0].title.english : vids[0].title.romaji}</h1>
-            <section className='videoContainer'>
-                <button>&#8610;</button>
-                <span></span>
-                <button>&#8611;</button>
-                <iframe src={trailer[nextTrailer]||''} />
-            </section>
+            {loadCarousel()}
         <img src={vids[0].bannerImage || ''} />
         <p>{vids[0].description}</p>
         <SmashButton incrementVid={incrementVid} animeId={vids[0].id} />
