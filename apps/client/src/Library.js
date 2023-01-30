@@ -38,9 +38,7 @@ const Library = () => {
             setAnimeLikes(filteredList)
             setIsFetching(false)
             setReqsSent(reqsSent+1)
-            console.log('what?')
         }catch(err){
-            console.log('error tripped',err)
             throw json({msg: err},{statusText: "Can't access Library"})
         }
         
