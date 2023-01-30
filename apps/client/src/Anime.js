@@ -1,42 +1,27 @@
 import {useEffect, useState} from 'react'
-import Carousel from 'react-bootstrap/Carousel'
 import Badge from 'react-bootstrap/Badge'
 import Accordion from 'react-bootstrap/Accordion'
 
 import SmashButton from './components/SmashButton'
 import PassButton from './components/PassButton'
+import ControlledCarousel from './components/ControlledCarousel'
+import Tags from './components/Tags'
+import Genres from './components/Genres'
 
 const Anime = ({anime, setLoggedIn}) => {
     //stores array of anime info
     const [vids, setVids] = useState([])
     //stores current video trailer link, needs vids then fetches from jikan(MAL)
     const [trailer, setTrailer] = useState([])
-    const [nextTrailer, setNextTrailer] = useState(0)
     //triggers use effect when nextvid is true
     const [nextVid, setNextVid] = useState(false)
 
     const incrementVid = () => setNextVid(!nextVid)
 
-    const loadCarousel = () => {
-        if(trailer.length)
-        {    return <Carousel className='trailerCarousel' interval={null}>
-                {trailer.map(vid => {
-                    const match = vid.match(/\/(?<key>[^\?]+)/)
-                    //double ternary, check for match, check for groups: resolves annoying edge cases
-                    //at worst use full vid url as key
-                    const key = match ? match.groups ? match.groups.key : '' : ''
-                    return <Carousel.Item key={key||vid}>
-                        <iframe src={vid} className="trailerItem" alt="a fabulous anime trailer that will change your world" />
-                    </Carousel.Item>
-                })}
-            </Carousel>
-            }
-    }
-
     const loadTags = () => {
         const tags = vids[0].tags.slice(0,5)
         if(tags.length){
-            return <Accordion defaultActiveKey={0} flush alwaysOpen>
+            return <Accordion defaultActiveKey={0} alwaysOpen>
                 {tags.map((tag, ind) => {
                     return <Accordion.Item key={tag.id} eventKey={ind}>
                         <Accordion.Header>{tag.category}</Accordion.Header>
@@ -50,7 +35,7 @@ const Anime = ({anime, setLoggedIn}) => {
     const loadGenres = () => {
         const genres = vids[0].genres
         if(genres.length){
-            return <section>
+            return <section className='genreCon'>
                 {genres.map(gen => {
                     const key = gen
                     return <Badge pill bg='info' key={key} >{gen}</Badge>
@@ -82,14 +67,11 @@ const Anime = ({anime, setLoggedIn}) => {
         if(vids.length > 1) setVids(vids.slice(1))
         else    grabAnimes()
 
-        
-    
     }, [nextVid])
 
    useEffect(() => {
     const grabTrailer = async () => {
         try{
-            setNextTrailer(0)
             let res = await fetch(`https://api.jikan.moe/v4/anime/${vids[0].idMal}/videos`)
             let data = await res.json()
 
@@ -111,14 +93,19 @@ const Anime = ({anime, setLoggedIn}) => {
 
     if(vids.length){
         return <section>
-            <section>
-            <img className='animeBanner' src={vids[0].bannerImage || ''} />
-            <h1>{vids[0].title.english ? vids[0].title.english : vids[0].title.romaji}</h1>
-            {loadGenres()}
+            <section className='animeCoverBanner'>
+                <img className='animeBanner' src={vids[0].bannerImage || ''} />
+                <h1>{vids[0].title.english ? vids[0].title.english : vids[0].title.romaji}</h1>
+                <Genres genres={vids[0].genres} />
             </section>
-            {loadCarousel()}
+            {
+                trailer.length ? 
+                <ControlledCarousel trailer={trailer} />
+                :
+                <img className='animeCover' src={vids[0].coverImage.extraLarge || ''} />
+            }
         <p className='animeDesc'>{vids[0].description}</p>
-        {loadTags()}
+        <Tags tags={vids[0].tags.slice(0,5)} />
         <SmashButton incrementVid={incrementVid} animeId={vids[0].id} />
         <PassButton incrementVid={incrementVid} animeId={vids[0].id} />
     </section>

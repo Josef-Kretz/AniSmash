@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react'
 import {useLoaderData} from 'react-router-dom'
-import CardGroup from 'react-bootstrap/CardGroup'
 
 import LibraryCard from './components/LibraryCard'
 import useInfiniteScroll from './components/useInfiniteScroll'

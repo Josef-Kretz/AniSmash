@@ -1,7 +1,13 @@
 h1{
     width: fit-content;
-    background:rgba(0,0,0, 0.4);
-    color: white;
+    margin: 0 auto;
+    font-size: 40px;
+    font-weight: bold;
+    -webkit-text-stroke: 1px white;
+}
+
+.genreCon {
+    text-align: center;
 }
 
 .librarySection{
@@ -23,9 +29,7 @@ h1{
 
 .animeDesc{
     width: 80%;
-    background: rgba(0,0,0, 0.4);
     margin: 0 auto;
-    color: white;
 }
 
 .trailerCarousel {
@@ -36,7 +40,6 @@ h1{
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0,0,0, 0.4);
 }
 
 .trailerItem {
@@ -57,4 +60,19 @@ div.carousel-inner{
 .carousel-control-next-icon,
 .carousel-indicators > button {
     filter: invert(1);
+}
+
+.accordion {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.animeCoverBanner {
+    margin: 0 auto;
+    padding-bottom: 5%;
+}
+
+.animeCover{
+    display:block;
+    margin: 0 auto;
 }
