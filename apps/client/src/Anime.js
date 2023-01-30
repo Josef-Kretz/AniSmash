@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
-import Badge from 'react-bootstrap/Badge'
-import Accordion from 'react-bootstrap/Accordion'
+import { json, redirect, useRouteError } from 'react-router-dom'
+
+import ErrorPage from './error-page'
 
 import SmashButton from './components/SmashButton'
 import PassButton from './components/PassButton'
@@ -16,33 +17,9 @@ const Anime = ({anime, setLoggedIn}) => {
     //triggers use effect when nextvid is true
     const [nextVid, setNextVid] = useState(false)
 
+    const [bigError, setBigError] = useState()
+
     const incrementVid = () => setNextVid(!nextVid)
-
-    const loadTags = () => {
-        const tags = vids[0].tags.slice(0,5)
-        if(tags.length){
-            return <Accordion defaultActiveKey={0} alwaysOpen>
-                {tags.map((tag, ind) => {
-                    return <Accordion.Item key={tag.id} eventKey={ind}>
-                        <Accordion.Header>{tag.category}</Accordion.Header>
-                        <Accordion.Body>{tag.description}</Accordion.Body>
-                    </Accordion.Item>
-                })}
-            </Accordion>
-        }
-    }
-
-    const loadGenres = () => {
-        const genres = vids[0].genres
-        if(genres.length){
-            return <section className='genreCon'>
-                {genres.map(gen => {
-                    const key = gen
-                    return <Badge pill bg='info' key={key} >{gen}</Badge>
-                })}
-            </section>
-        }
-    }
 
    useEffect(()=>{
     const grabAnimes = async () => {
@@ -60,8 +37,7 @@ const Anime = ({anime, setLoggedIn}) => {
             
             setVids(animelist.slice())
         }catch(err){
-            //replace with throw error afterwards
-            console.log(err)
+            setBigError({msg: err},{statusText: "Can't access Anime API"})
         }}
 
         if(vids.length > 1) setVids(vids.slice(1))
@@ -82,14 +58,15 @@ const Anime = ({anime, setLoggedIn}) => {
             const trailers = data.data.promo.map(trail => trail.trailer.embed_url)
             setTrailer(trailers)
         }catch(err){
-            //replace with throw error afterwards
-            console.log(err)
+            setBigError({msg: err},{statusText: "Can't access Trailer API"})
         }
         
     }
         if(vids[0]) grabTrailer()
 
    }, [vids[0]])
+
+   if(bigError) throw json(bigError)
 
     if(vids.length){
         return <section>

@@ -12,8 +12,6 @@ const ControlledCarousel = ({trailer}) => {
         setIndex(0)
     }, [trailer])
 
-    console.log(trailer)
-
     if(trailer.length < 1) return <></>
 
     return <Carousel className='trailerCarousel' activeIndex={index} onSelect={changeCarIndex} interval={null}>

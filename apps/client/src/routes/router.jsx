@@ -15,16 +15,19 @@ const router = createBrowserRouter([
       children: [
         {
           path: "anime",
-          element: <Anime />
+          element: <Anime />,
+          errorElement: <ErrorPage />
         },
         {
           path: "library",
           element: <Library />,
+          errorElement: <ErrorPage />,
           loader: libraryLoader
         },
         {
           path:"library/:animeId",
           element: <AnimePage />,
+          errorElement: <ErrorPage />,
           loader: animeLoader
         }
       ]

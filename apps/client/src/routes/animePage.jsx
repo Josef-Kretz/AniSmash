@@ -1,4 +1,4 @@
-import {useLoaderData, useFetcher} from 'react-router-dom'
+import {useLoaderData, useFetcher, json} from 'react-router-dom'
 
 import Genres from '../components/Genres'
 import Tags from '../components/Tags'
@@ -59,7 +59,7 @@ const url = `https://graphql.anilist.co`
 
         return data
       }catch(err){
-        return {isError: true, data: err}
+        throw json({msg:err},{statusText:'Error retrieving anime page: Anime API error'})
       }
 
 }
@@ -75,8 +75,7 @@ const fetchTrailer = async (idMal) => {
     const trailers = data.data.promo.map(trail => trail.trailer.embed_url)
     return trailers.slice()
 }catch(err){
-    //replace with throw error afterwards
-    console.log(err)
+  throw json({msg:err},{statusText:'Error retrieving anime page: Trailer API error'})
 }
 }
 
@@ -90,13 +89,13 @@ export async function loader({params})
       return {anime: anime, trailer: trailer}
     }catch(err)
     {
-      console.log(err)
+      throw json({msg:err},{statusText:'Error retrieving anime page'})
     }
 }
 
 export default function AnimePage() {
     const animeLoader = useLoaderData()
-    if(animeLoader.isError) return <h1>Error fetching anime</h1>
+    if(animeLoader.isError) throw json({msg:'API error'},{statusText:'Error retrieving anime page'})
 
     const anime = animeLoader.anime.data.Media
     const trailer = animeLoader.trailer
