@@ -8,7 +8,6 @@ import BgClouds from '../components/BgClouds'
 
 export default function Root(){
     const [loggedIn, setLoggedIn] = useState(false)
-    const [anime, setAnime] = useState([])
 
     return (<>
             <BgClouds limit={100} />

@@ -5,7 +5,7 @@ const main = {
         const user = await User.find({user: req.user})
         const animeId = req.body.animeId
 
-        if(user[0].notLikes.includes(animeId)) user[0].notLikes.filter(id => id != animeId)
+        if(user[0].notLikes.includes(animeId)) user[0].notLikes = user[0].notLikes.filter(id => id != animeId)
         if(!user[0].likes.includes(animeId)) user[0].likes.push(animeId)
 
         user[0].save()
@@ -16,7 +16,7 @@ const main = {
         const user = await User.find({user: req.user})
         const animeId = req.body.animeId
 
-        if(user[0].likes.includes(animeId)) user[0].likes.filter(id => id != animeId)
+        if(user[0].likes.includes(animeId)) user[0].likes = user[0].likes.filter(id => id != animeId)
         if(!user[0].notLikes.includes(animeId)) user[0].notLikes.push(animeId)
 
         user[0].save()

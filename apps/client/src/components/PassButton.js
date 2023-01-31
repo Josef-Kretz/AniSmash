@@ -12,9 +12,13 @@ const PassButton = ({incrementVid, animeId}) => {
             },
             body: JSON.stringify({animeId : +animeId})
         }
-
-        const res = await fetch('/hate', options)
-        const data = await res.json()
+        try{
+            const res = await fetch('/hate', options)
+            const data = await res.json()
+        }catch(err){
+            console.log(err)
+        }
+        
     }
 
     const onSubmit = (e) => {

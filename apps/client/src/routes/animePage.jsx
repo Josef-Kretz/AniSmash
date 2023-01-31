@@ -113,7 +113,7 @@ export default function AnimePage() {
           :
           <img className='animeCover' src={anime.coverImage.extraLarge || ''} />
           }
-        <p className='animeDesc'>{anime.description}</p>
+        <p className='animeDesc'>{anime.description.replace(/(<[^>]+>)/g, '')}</p>
         <Tags tags={anime.tags.slice(0,5)} />
 
   </section>

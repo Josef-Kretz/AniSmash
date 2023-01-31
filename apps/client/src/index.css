@@ -85,3 +85,8 @@ div.carousel-inner{
 .cloud{
     position:absolute;
 }
+
+.modalFrame {
+    width: 100%;
+    height: 100%;
+}
