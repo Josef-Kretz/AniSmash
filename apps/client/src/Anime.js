@@ -1,8 +1,6 @@
 import {useEffect, useState} from 'react'
 import { json, redirect, useRouteError } from 'react-router-dom'
 
-import ErrorPage from './error-page'
-
 import SmashButton from './components/SmashButton'
 import PassButton from './components/PassButton'
 import ControlledCarousel from './components/ControlledCarousel'

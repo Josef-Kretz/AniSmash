@@ -17,7 +17,7 @@ const LibraryCard = ({anime}) => {
         console.log('test')
     }
 
-    return (<Card className='libraryCard'>
+    return (<Card className='libraryCard' style={{backgroundColor:'rgba(255,255,255,0.7)'}}>
         <Card.Img variant="top" src={large} onClick={popupAnime}/>
         <Card.Body>
             <Card.Title>{title}</Card.Title>

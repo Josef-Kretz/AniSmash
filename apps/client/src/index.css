@@ -78,7 +78,7 @@ div.carousel-inner{
 }
 
 #bgClouds{
-    position:absolute;
+    position:fixed;
     z-index: -1;
 }
 

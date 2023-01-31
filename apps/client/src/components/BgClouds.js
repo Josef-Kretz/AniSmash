@@ -4,7 +4,7 @@
 //https://stackoverflow.com/questions/42966641/how-to-transform-black-into-any-given-color-using-only-css-filters/43960991#43960991
 
 
-import { useWindowDimension } from './WindowDimenion' //change to use body size not window size
+import { useWindowDimension } from './WindowDimenion'
 import React,{ useState, useEffect } from 'react'
 
 const BgClouds = ({limit=100}) => {
@@ -42,7 +42,7 @@ const BgClouds = ({limit=100}) => {
 
             cloudArray.push(React.createElement('img',{
                 className: 'cloud',
-                src: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Cartoon_cloud.svg',
+                src: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Cartoon_cloud.svg', //host on server afterward
                 style: cloudStyle
             }))
         }
