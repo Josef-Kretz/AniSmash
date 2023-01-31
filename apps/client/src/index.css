@@ -76,3 +76,12 @@ div.carousel-inner{
     display:block;
     margin: 0 auto;
 }
+
+#bgClouds{
+    position:absolute;
+    z-index: -1;
+}
+
+.cloud{
+    position:absolute;
+}
