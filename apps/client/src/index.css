@@ -1,3 +1,36 @@
+.animeCoverBanner {
+    margin: 0 auto;
+    padding-bottom: 5%;
+}
+
+.animeCover{
+    display:block;
+    margin: 0 auto;
+}
+
+/* ================================================ */
+/*                  Background                      */
+/* ================================================ */
+#bgClouds{
+    position:fixed;
+    z-index: -1;
+}
+
+.cloud{
+    position:absolute;
+}
+
+/* ================================================ */
+/*                  Anime Info                      */
+/* ================================================ */
+/* ANIME BANNER */
+.animeBanner {
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+/* ANIME TITLE */
 h1{
     width: fit-content;
     margin: 0 auto;
@@ -6,32 +39,12 @@ h1{
     -webkit-text-stroke: 1px white;
 }
 
+/* GENRE CONTAINER */
 .genreCon {
     text-align: center;
 }
 
-.librarySection{
-    overflow-y: auto;
-    display: flex;
-    flex-flow: wrap row;
-}
-
-.librarySection > .libraryCard{
-    width: 250px;
-
-}
-
-.animeBanner {
-    width: 100%;
-    position: absolute;
-    z-index: -1;
-}
-
-.animeDesc{
-    width: 80%;
-    margin: 0 auto;
-}
-
+/* TRAILER CAROUSEL */
 .trailerCarousel {
     text-align:center;
     max-width:700px;
@@ -62,28 +75,29 @@ div.carousel-inner{
     filter: invert(1);
 }
 
-.accordion {
+/* ANIME DESCRIPTION */
+.animeDesc{
     width: 80%;
     margin: 0 auto;
 }
 
-.animeCoverBanner {
-    margin: 0 auto;
-    padding-bottom: 5%;
-}
-
-.animeCover{
-    display:block;
+/* TAGs ACCORDION */
+.accordion {
+    width: 80%;
     margin: 0 auto;
 }
-
-#bgClouds{
-    position:fixed;
-    z-index: -1;
+/* ================================================ */
+/*                  Library                         */
+/* ================================================ */
+.librarySection{
+    overflow-y: auto;
+    display: flex;
+    flex-flow: wrap row;
 }
 
-.cloud{
-    position:absolute;
+.librarySection > .libraryCard{
+    width: 250px;
+
 }
 
 .modalFrame {
