@@ -1,10 +1,23 @@
 import {useState, useEffect} from 'react'
 
+function debounce(fn, ms) {
+    let timer;
+    return _ => {
+      clearTimeout(timer);
+      timer = setTimeout(_ => {
+        timer = null;
+        fn.apply(this, arguments);
+      }, ms);
+    };
+  }
+
 const useInfiniteScroll = (callback) => {
     const [isFetching, setIsFetching] = useState(false)
     useEffect(() => {
-        //debounce scroll listener afterwards
-        window.addEventListener('scroll', handleScroll)
+        const debouncedHandleScroll = debounce( () => {
+            handleScroll()
+        }, 100) //debounces by 100ms
+        window.addEventListener('scroll', debouncedHandleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [])
 

@@ -1,5 +1,6 @@
-import {useState, useEffect} from 'react'
+import {useState} from 'react'
 import {json, useLoaderData} from 'react-router-dom'
+import Spinner from 'react-bootstrap/Spinner'
 
 import LibraryCard from './components/LibraryCard'
 import useInfiniteScroll from './components/useInfiniteScroll'
@@ -44,7 +45,13 @@ const Library = () => {
         
     }
 
-    return <section className='librarySection'>{animeLikes.map(anime => <LibraryCard anime={anime} key={anime.id} />)}</section>
+    return <section className='librarySection'>{animeLikes.map(anime => <LibraryCard anime={anime} key={anime.id} />)}
+    {
+        isFetching ? 
+        <Spinner role='status' variant='info' className='librarySpinner' style={{height:'150px', width:'150px'}} animation='border'><span className='visually-hidden' >Loading...</span></Spinner>
+        : <></>
+    }
+    </section>
 }
 
 export default Library

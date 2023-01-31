@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react'
-import { json, redirect, useRouteError } from 'react-router-dom'
+import { json } from 'react-router-dom'
+import Spinner from 'react-bootstrap/Spinner'
 
 import SmashButton from './components/SmashButton'
 import PassButton from './components/PassButton'
@@ -14,7 +15,7 @@ const Anime = ({anime, setLoggedIn}) => {
     const [trailer, setTrailer] = useState([])
     //triggers use effect when nextvid is true
     const [nextVid, setNextVid] = useState(false)
-
+    //useEffect swallows catches
     const [bigError, setBigError] = useState()
 
     const incrementVid = () => setNextVid(!nextVid)
@@ -86,7 +87,7 @@ const Anime = ({anime, setLoggedIn}) => {
     </section>
     }
 
-    return <h1>Loading</h1>
+    return <Spinner role='status' variant='info' className='librarySpinner' style={{height:'150px', width:'150px'}} animation='border'><span className='visually-hidden' >Loading...</span></Spinner>
 }
 
 export default Anime

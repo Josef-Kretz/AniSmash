@@ -1,13 +1,3 @@
-.animeCoverBanner {
-    margin: 0 auto;
-    padding-bottom: 5%;
-}
-
-.animeCover{
-    display:block;
-    margin: 0 auto;
-}
-
 /* ================================================ */
 /*                  Background                      */
 /* ================================================ */
@@ -24,6 +14,10 @@
 /*                  Anime Info                      */
 /* ================================================ */
 /* ANIME BANNER */
+.animeCoverBanner {
+    margin: 0 auto;
+    padding-bottom: 5%;
+}
 .animeBanner {
     width: 100%;
     position: absolute;
@@ -75,6 +69,12 @@ div.carousel-inner{
     filter: invert(1);
 }
 
+/* ANIME COVER IMAGE: LOADS IF NO CAROUSEL */
+.animeCover{
+    display:block;
+    margin: 0 auto;
+}
+
 /* ANIME DESCRIPTION */
 .animeDesc{
     width: 80%;
@@ -103,4 +103,15 @@ div.carousel-inner{
 .modalFrame {
     width: 100%;
     height: 100%;
+}
+
+.librarySpinner {
+    margin: auto;
+}
+
+/* ================================================ */
+/*                  Error Page                      */
+/* ================================================ */
+#error-page{
+    text-align: center;
 }
