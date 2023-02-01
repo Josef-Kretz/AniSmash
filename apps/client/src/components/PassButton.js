@@ -15,6 +15,8 @@ const PassButton = ({incrementVid, animeId}) => {
         try{
             const res = await fetch('/hate', options)
             const data = await res.json()
+            //add error handling and alerts afterward
+            console.log(data)
         }catch(err){
             console.log(err)
         }

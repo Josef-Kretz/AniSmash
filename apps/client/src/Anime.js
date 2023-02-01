@@ -8,7 +8,7 @@ import ControlledCarousel from './components/ControlledCarousel'
 import Tags from './components/Tags'
 import Genres from './components/Genres'
 
-const Anime = ({anime, setLoggedIn}) => {
+const Anime = () => {
     //stores array of anime info
     const [vids, setVids] = useState([])
     //stores current video trailer link, needs vids then fetches from jikan(MAL)
@@ -22,11 +22,15 @@ const Anime = ({anime, setLoggedIn}) => {
 
    useEffect(()=>{
     const grabAnimes = async () => {
+        console.log('grabbing anime')
         try{
             let res = await fetch('/api/trailer')
             let data = await res.json()
 
-            if(data.isError) return //replace with throw error afterwards
+            if(data.isError || res.status!= 200){
+                setBigError({msg: res.status },{statusText: "Can't access Anime API"})
+                return
+            }
 
             let animelist = data.data.Page.media
             animelist = animelist.map( anime => {
@@ -46,9 +50,16 @@ const Anime = ({anime, setLoggedIn}) => {
 
    useEffect(() => {
     const grabTrailer = async () => {
+        if(!vids[0].idMal) return
+
         try{
             let res = await fetch(`https://api.jikan.moe/v4/anime/${vids[0].idMal}/videos`)
             let data = await res.json()
+
+            if(res.status != 200){
+                //don't need to interrupt app if no trailer found
+                return
+            }
 
             if(!data.data.promo.length){
                 setTrailer([])

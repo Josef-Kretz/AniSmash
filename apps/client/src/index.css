@@ -1,4 +1,20 @@
 /* ================================================ */
+/*                  General Styling                 */
+/* ================================================ */
+#root{
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 60px;
+}
+footer{
+    position:absolute;
+    left: 0;
+    bottom: 0;
+    right:0;
+}
+
+
+/* ================================================ */
 /*                  Background                      */
 /* ================================================ */
 #bgClouds{
@@ -25,10 +41,10 @@
 }
 
 /* ANIME TITLE */
-h1{
+.animeCoverBanner h1{
     width: fit-content;
     margin: 0 auto;
-    font-size: 40px;
+    font-size: 45px;
     font-weight: bold;
     -webkit-text-stroke: 1px white;
 }
@@ -73,12 +89,16 @@ div.carousel-inner{
 .animeCover{
     display:block;
     margin: 0 auto;
+    max-width: 100%;
+    padding-bottom: 5%;
 }
 
 /* ANIME DESCRIPTION */
 .animeDesc{
     width: 80%;
     margin: 0 auto;
+    margin-bottom: 5%;
+    background: rgba(255,255,255,0.6)
 }
 
 /* TAGs ACCORDION */
@@ -97,7 +117,6 @@ div.carousel-inner{
 
 .librarySection > .libraryCard{
     width: 250px;
-
 }
 
 .modalFrame {
@@ -114,4 +133,40 @@ div.carousel-inner{
 /* ================================================ */
 #error-page{
     text-align: center;
+}
+
+/* ================================================ */
+/*                  Profile                         */
+/* ================================================ */
+.profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profileBody{
+    width:100%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+
+.profile h1{
+    width: fit-content;
+    margin: 0 auto;
+    font-size: 45px;
+    font-weight: bold;
+    -webkit-text-stroke: 1px white;
+}
+
+.profileLikeCon,
+.profileNotLikeCon {
+    display: flex;
+    flex-direction: column;
+    width:fit-content;
+    margin: 0 25px;
+}
+
+#profileLikes,
+#profileNotLikes {
+    min-height: 200px;
 }

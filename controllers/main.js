@@ -26,11 +26,33 @@ const main = {
     getProfile : async (req, res) => {
         const user = await User.find({user : req.user})
 
-        return res.status(200).json({
+        res.status(200).json({
             email: user[0].email,
             likes : user[0].likes,
             notLikes : user[0].notLikes
         })
+    },
+    eraseLikes : async (req, res) => {
+        const user = await User.find({user : req.user})
+
+        user[0].likes = []
+        user[0].save()
+
+        res.status(200).json('Successfully erased Liked Anime')
+
+    },
+    eraseNotLikes : async (req, res) => {
+        const user = await User.find({user : req.user})
+
+        user[0].notLikes = []
+        user[0].save()
+
+        res.status(200).json('Successfully erase Not Liked Anime')
+
+    },
+    deleteUser : async (req, res) => {
+        await User.deleteOne({user : req.user})
+        res.status(200).json('User is deleted')
     }
 }
 

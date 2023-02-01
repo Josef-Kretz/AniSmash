@@ -28,14 +28,13 @@ const BgClouds = ({limit=100}) => {
     useEffect(()=>{
         let cloudArray = []
         for(let i =0;i< limit;++i){
-            const cloudHeight = Math.floor(0.1*height)+Math.floor(Math.random() * (height/limit))
             const cloudWidth = Math.floor(0.1*width)+Math.floor(Math.random() * (width/limit))
             const cloudColor = colors[Math.floor(Math.random() * colors.length)]
 
             let cloudStyle = {
-                height: `${cloudHeight}px`,
+                height: 'auto',
                 width: `${cloudWidth}px`,
-                top: `${Math.floor(Math.random() * (height-cloudHeight))}px`,
+                top: `${Math.floor(Math.random() * (height))}px`,
                 left: `${Math.floor(Math.random() * (width-cloudWidth))}px`,
                 filter: 'brightness(0) saturate(100%) ' + cloudColor
         }

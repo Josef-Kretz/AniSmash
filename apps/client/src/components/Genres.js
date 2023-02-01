@@ -9,6 +9,7 @@ const Genres = ({genres}) => {
             })}
         </section>
     }
+    return <></>
   }
 
   export default Genres

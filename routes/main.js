@@ -13,6 +13,10 @@ router.post('/hate', mainController.hate)
 
 router.get('/getProfile', mainController.getProfile)
 
+router.delete('/eraseLikes', mainController.eraseLikes)
+router.delete('/eraseNotLikes', mainController.eraseNotLikes)
+router.delete('/deleteUser', mainController.deleteUser)
+
 router.get('/check', apiController.checkUser)
 
 module.exports = router
