@@ -11,6 +11,8 @@ router.post('/signup', authController.postSignup)
 router.post('/like', mainController.addLike)
 router.post('/hate', mainController.hate)
 
+router.get('/getProfile', mainController.getProfile)
+
 router.get('/check', apiController.checkUser)
 
 module.exports = router

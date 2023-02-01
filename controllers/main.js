@@ -22,6 +22,15 @@ const main = {
         user[0].save()
 
         res.status(200).json({isError: false, msg: 'Successfully updated'})
+    },
+    getProfile : async (req, res) => {
+        const user = await User.find({user : req.user})
+
+        return res.status(200).json({
+            email: user[0].email,
+            likes : user[0].likes,
+            notLikes : user[0].notLikes
+        })
     }
 }
 

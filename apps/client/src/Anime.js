@@ -87,7 +87,7 @@ const Anime = ({anime, setLoggedIn}) => {
     </section>
     }
 
-    return <Spinner role='status' variant='info' className='librarySpinner' style={{height:'150px', width:'150px'}} animation='border'><span className='visually-hidden' >Loading...</span></Spinner>
+    return <Spinner role='status' variant='info' className='animeSpinner' style={{height:'150px', width:'150px'}} animation='border'><span className='visually-hidden' >Loading...</span></Spinner>
 }
 
 export default Anime

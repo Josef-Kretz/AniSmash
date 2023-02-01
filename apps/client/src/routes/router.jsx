@@ -6,6 +6,7 @@ import ErrorPage from '../error-page'
 import Anime from '../Anime'
 import AnimePage, {loader as animeLoader} from './animePage'
 import Library, {loader as libraryLoader} from '../Library'
+import Profile, {loader as profileLoader} from '../Profile'
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,12 @@ const router = createBrowserRouter([
           element: <AnimePage />,
           errorElement: <ErrorPage />,
           loader: animeLoader
+        },
+        {
+          path:'profile',
+          element: <Profile />,
+          errorElement: <ErrorPage />,
+          loader: profileLoader
         }
       ]
     }
