@@ -1,6 +1,9 @@
 /* ================================================ */
 /*                  General Styling                 */
 /* ================================================ */
+header{
+    background: rgba(255,255,255,0.6);
+}
 #root{
     min-height: 100vh;
     position: relative;
@@ -11,8 +14,21 @@ footer{
     left: 0;
     bottom: 0;
     right:0;
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+}
+.footerApi{
+    list-style: none;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0 10px;
 }
 
+.footerApi::before{
+    content: attr(aria-label)
+}
 
 /* ================================================ */
 /*                  Background                      */
@@ -46,6 +62,7 @@ footer{
     margin: 0 auto;
     font-size: 45px;
     font-weight: bold;
+    text-align: center;
     -webkit-text-stroke: 1px white;
 }
 
@@ -155,7 +172,16 @@ div.carousel-inner{
     margin: 0 auto;
     font-size: 45px;
     font-weight: bold;
+    text-align: center;
     -webkit-text-stroke: 1px white;
+}
+
+.animeQuote{
+    margin: 0 5%;
+}
+
+.animeQuote p{
+    background: rgba(255,255,255,0.6)
 }
 
 .profileLikeCon,
@@ -163,10 +189,15 @@ div.carousel-inner{
     display: flex;
     flex-direction: column;
     width:fit-content;
-    margin: 0 25px;
+    margin: 10px 25px;
 }
 
 #profileLikes,
 #profileNotLikes {
     min-height: 200px;
 }
+
+#deleteUser {
+    margin-top: 10%;
+}
+

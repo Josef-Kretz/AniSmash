@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {json, useLoaderData} from 'react-router-dom'
+import {json, useLoaderData, Link} from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 
 import LibraryCard from './components/LibraryCard'
@@ -44,6 +44,8 @@ const Library = () => {
         }
         
     }
+
+    if(!animeLikes.length) return <section>There's no error, there's just nothing here. Swipe on some <Link to='../anime' style={{fontWeight:'bold'}}>Animes</Link>!</section>
 
     return <section className='librarySection'>{animeLikes.map(anime => <LibraryCard anime={anime} key={anime.id} />)}
     {
