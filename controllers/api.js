@@ -6,11 +6,16 @@ const api = {
     
     getTrailer: async (req, res) => {
         const AniSearch = require('./AniSearch')
-        const user = await User.find({user: req.user})
+        try{
+            const user = await User.find({user: req.user})
 
-        const data = await AniSearch.findTrending(user[0].likes, user[0].notLikes)
-        if(data.isError) return res.status(500).json('Error retrieving data from Animes Databases')
-        return res.status(200).json(data)
+            const data = await AniSearch.findTrending(user[0].likes, user[0].notLikes)
+            if(data.isError) return res.status(500).json('Error retrieving data from Animes Databases')
+            return res.status(200).json(data)
+        }catch(err){
+            console.log('err api getTrailer:',err)
+        }
+        
     },
     checkUser : (req, res) => {
         if(req.isAuthenticated()) return res.status(200).json(true)
@@ -18,34 +23,48 @@ const api = {
     },
     rec: async (req, res) => {
         const AniSearch = require('./AniSearch')
-        const data = await AniSearch.findRecommends(269)
-        if(data.isError) return res.status(500).json('Error retrieving data from Animes Databases')
-        return res.status(200).json(data)
+        try{
+            const data = await AniSearch.findRecommends(269)
+            if(data.isError) return res.status(500).json('Error retrieving data from Animes Databases')
+            return res.status(200).json(data)
+        }catch(err){
+            console.log('err api rec:', err)
+        }
+        
     },
     trending: async(req, res) => {
         const AniSearch = require('./AniSearch')
-        const user = await User.find({user: req.user})
+        try{
+            const user = await User.find({user: req.user})
+            const data = await AniSearch.findTrending(user[0].likes, user[0].notLikes)
+            if(data.isError === true) return res.status(500).json('Error retrieving data from Animes Databases')
 
-        const data = await AniSearch.findTrending(user[0].likes, user[0].notLikes)
-        if(data.isError === true) return res.status(500).json('Error retrieving data from Animes Databases')
-
-        return res.status(200).json(data)
+            return res.status(200).json(data)
+        }catch(err){
+            console.log('err api trending:', err)
+        }
     },
     getLibrary: async (req, res) => {
         const AniSearch = require('./AniSearch')
-        const user = await User.find({user: req.user})
+        try{
+            const user = await User.find({user: req.user})
 
-        const length = user[0].likes.length
-        //ensure param positive int
-        let num = req.params.num
-        num = Number.isNaN(+num) ? 0 : +num
-        //start index for search
-        num *= 12
+            const length = user[0].likes.length
+            //ensure param positive int
+            let num = req.params.num
+            num = Number.isNaN(+num) ? 0 : +num
+            //start index for search
+            num *= 12
 
-        const likes = user[0].likes.slice(num, num+12)
-        const data = await AniSearch.getList(likes)
+            const likes = user[0].likes.slice(num, num+12)
+            const data = await AniSearch.getList(likes)
 
-        return res.status(200).json(data)
+            return res.status(200).json(data)
+
+        }catch(err){
+            console.log('err api getlibrary:', err)
+        }
+        
     }
 }
 
