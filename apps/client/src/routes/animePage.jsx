@@ -66,6 +66,8 @@ const url = `https://graphql.anilist.co`
 
 const fetchTrailer = async (idMal) => {
   try{
+    if(!idMal) return []
+
     let res = await fetch(`https://api.jikan.moe/v4/anime/${idMal}/videos`)
     let data = await res.json()
 
@@ -115,7 +117,6 @@ export default function AnimePage() {
           }
         <p className='animeDesc'>{anime.description.replace(/(<[^>]+>)/g, '')}</p>
         <Tags tags={anime.tags.slice(0,5)} />
-
   </section>
     )
 }

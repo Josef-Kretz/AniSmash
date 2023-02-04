@@ -46,9 +46,11 @@ const Anime = () => {
         if(vids.length > 1) setVids(vids.slice(1))
         else    grabAnimes()
 
+        window.scrollTo(0,0)
     }, [nextVid])
 
    useEffect(() => {
+    console.log(vids[0])
     const grabTrailer = async () => {
         if(!vids[0].idMal) return
 

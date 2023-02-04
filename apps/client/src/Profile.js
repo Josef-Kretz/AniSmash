@@ -18,20 +18,24 @@ const handleErase = async (e) => {
     const buttons = {
         'eraseLikes' : {
             url : 'eraseLikes',
-            msg : 'Are you certain about deleting your Liked Anime?'
+            msg : 'Are you certain about deleting your Liked Anime?',
+            listBox: 'profileLikes'
         },
         'eraseNotLikes' : {
             url : 'eraseNotLikes',
-            msg : 'Are you certain about deleting your Not Liked Anime?'
+            msg : 'Are you certain about deleting your Not Liked Anime?',
+            listBox: 'profileNotLikes'
         },
         'deleteUser' : {
             url : 'deleteUser',
-            msg : 'Please confirm you would like to delete your account. This is not reversible'
+            msg : 'Please confirm you would like to delete your account. This is not reversible',
+            textBox: ''
         }
     }
     const button = e.target.id
     const url = buttons[button].url
     const msg = buttons[button].msg
+    const listBox = buttons[button].listBox
 
     if(window.confirm(msg)===false) return
 
@@ -51,6 +55,7 @@ const handleErase = async (e) => {
             console.log('request error', res.status, res.statusText)
             return
         }
+        if(button == 'eraseLikes' || button == 'eraseNotLikes') document.getElementById(listBox).value = ''
         //replace with alert later
         console.log('success!', data)
     }catch(err){

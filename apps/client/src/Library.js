@@ -26,7 +26,10 @@ const Library = () => {
         try{
             let reqs = reqsSent*12
             let dbAnime = animeLikes.length+12
-            if(reqs > dbAnime) return
+            if(reqs > dbAnime) {
+                setIsFetching(false)
+                return
+            }
 
             const res = await fetch(`/api/getlibrary/${reqsSent}`)
             const data = await res.json()

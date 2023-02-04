@@ -145,6 +145,16 @@ div.carousel-inner{
     margin: auto;
 }
 
+.libraryModal .animeBanner {
+    z-index: 0;
+    max-width: 98%;
+}
+
+.libraryModal h1,
+.libraryModal .genreCon{
+    position: relative;
+}
+
 /* ================================================ */
 /*                  Error Page                      */
 /* ================================================ */
@@ -180,7 +190,8 @@ div.carousel-inner{
     margin: 0 5%;
 }
 
-.animeQuote p{
+.animeQuote > p,
+.animeQuote > span{
     background: rgba(255,255,255,0.6)
 }
 
