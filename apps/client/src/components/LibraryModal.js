@@ -6,6 +6,7 @@ import {json} from 'react-router-dom'
 import Genres from './Genres'
 import Tags from './Tags'
 import ControlledCarousel from './ControlledCarousel'
+import ExtLinks from './ExtLinks'
 
 const fetchAnime = async (animeId) =>{
     const query = `{
@@ -107,7 +108,10 @@ const LibraryModal = ({show, setShow, animeId}) => {
     }, [show])
 
     if(anime) return <Modal className='libraryModal' show={show} fullscreen={true}>
-        <Modal.Header><Button onClick={closeModal}>&#11160;</Button></Modal.Header>
+        <Modal.Header>
+          <Button onClick={closeModal}>&#11160;</Button>
+          <Modal.Title>AniSmash</Modal.Title>
+        </Modal.Header>
         <Modal.Body>
             <section className='animeCoverBanner'>
                 <img className='animeBanner' src={anime.bannerImage || ''} />
@@ -122,6 +126,7 @@ const LibraryModal = ({show, setShow, animeId}) => {
             }
             <p className='animeDesc'>{anime.description.replace(/(<[^>]+>)/g, '')}</p>
             <Tags tags={anime.tags.slice(0,5)} />
+            <ExtLinks links={anime.externalLinks} />
         </Modal.Body> 
     </Modal>
 }

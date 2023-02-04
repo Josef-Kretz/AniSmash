@@ -7,6 +7,7 @@ import PassButton from './components/PassButton'
 import ControlledCarousel from './components/ControlledCarousel'
 import Tags from './components/Tags'
 import Genres from './components/Genres'
+import ExtLinks from './components/ExtLinks'
 
 const Anime = () => {
     //stores array of anime info
@@ -22,7 +23,6 @@ const Anime = () => {
 
    useEffect(()=>{
     const grabAnimes = async () => {
-        console.log('grabbing anime')
         try{
             let res = await fetch('/api/trailer')
             let data = await res.json()
@@ -46,11 +46,12 @@ const Anime = () => {
         if(vids.length > 1) setVids(vids.slice(1))
         else    grabAnimes()
 
-        window.scrollTo(0,0)
+        
     }, [nextVid])
 
    useEffect(() => {
-    console.log(vids[0])
+    window.scrollTo(0,0) //scroll to top whenever current anime changes (vids[0])
+
     const grabTrailer = async () => {
         if(!vids[0].idMal) return
 
@@ -95,6 +96,7 @@ const Anime = () => {
             }
         <p className='animeDesc'>{vids[0].description}</p>
         <Tags tags={vids[0].tags.slice(0,5)} />
+        <ExtLinks links={vids[0].externalLinks} />
         <SmashButton incrementVid={incrementVid} animeId={vids[0].id} />
         <PassButton incrementVid={incrementVid} animeId={vids[0].id} />
     </section>

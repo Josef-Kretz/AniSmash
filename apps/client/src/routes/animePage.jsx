@@ -3,6 +3,7 @@ import {useLoaderData, useFetcher, json} from 'react-router-dom'
 import Genres from '../components/Genres'
 import Tags from '../components/Tags'
 import ControlledCarousel from '../components/ControlledCarousel'
+import ExtLinks from '../components/ExtLinks'
 
 const fetchAnime = async (animeId) =>{
   const query = `{
@@ -117,6 +118,7 @@ export default function AnimePage() {
           }
         <p className='animeDesc'>{anime.description.replace(/(<[^>]+>)/g, '')}</p>
         <Tags tags={anime.tags.slice(0,5)} />
+        <ExtLinks links={anime.externalLinks} />
   </section>
     )
 }
