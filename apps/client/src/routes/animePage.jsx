@@ -4,6 +4,8 @@ import Genres from '../components/Genres'
 import Tags from '../components/Tags'
 import ControlledCarousel from '../components/ControlledCarousel'
 import ExtLinks from '../components/ExtLinks'
+import SmashButton from '../components/SmashButton'
+import PassButton from '../components/PassButton'
 
 const fetchAnime = async (animeId) =>{
   const query = `{
@@ -116,6 +118,10 @@ export default function AnimePage() {
           :
           <img className='animeCover' src={anime.coverImage.extraLarge || ''} />
           }
+        <section className='smashPassCon'>
+            <SmashButton incrementVid={false} animeId={anime.id} />
+            <PassButton incrementVid={false} animeId={anime.id} />
+        </section>
         <p className='animeDesc'>{anime.description.replace(/(<[^>]+>)/g, '')}</p>
         <Tags tags={anime.tags.slice(0,5)} />
         <ExtLinks links={anime.externalLinks} />

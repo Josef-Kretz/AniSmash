@@ -50,7 +50,7 @@ const Library = () => {
 
     if(!animeLikes.length) return <section>There's no error, there's just nothing here. Swipe on some <Link to='../anime' style={{fontWeight:'bold'}}>Animes</Link>!</section>
 
-    return <section className='librarySection'>{animeLikes.map(anime => <LibraryCard anime={anime} key={anime.id} />)}
+    return <section className='librarySection'>{animeLikes.map(anime => <LibraryCard anime={anime} />)}
     {
         isFetching ? 
         <Spinner role='status' variant='info' className='librarySpinner' style={{height:'150px', width:'150px'}} animation='border'><span className='visually-hidden' >Loading...</span></Spinner>

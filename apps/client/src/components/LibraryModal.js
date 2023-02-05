@@ -7,6 +7,8 @@ import Genres from './Genres'
 import Tags from './Tags'
 import ControlledCarousel from './ControlledCarousel'
 import ExtLinks from './ExtLinks'
+import SmashButton from './SmashButton'
+import PassButton from './PassButton'
 
 const fetchAnime = async (animeId) =>{
     const query = `{
@@ -74,19 +76,20 @@ const fetchAnime = async (animeId) =>{
       let res = await fetch(`https://api.jikan.moe/v4/anime/${idMal}/videos`)
       let data = await res.json()
   
-      if(!data.data.promo.length){
-          return []
+      if(!data.data.promo.length || res.status!==200){
+          return
       }
       const trailers = data.data.promo.map(trail => trail.trailer.embed_url)
       return trailers.slice()
   }catch(err){
-    throw json({msg:err},{statusText:'Error retrieving anime page: Trailer API error'})
+    //don't need to interrupt app if trailer API error
+    return
   }
   }
 
 const LibraryModal = ({show, setShow, animeId}) => {
     const [anime, setAnime] = useState()
-    const [trailer, setTrailer] = useState()
+    const [trailer, setTrailer] = useState([])
 
     const closeModal = () => setShow(false)
 
@@ -98,9 +101,6 @@ const LibraryModal = ({show, setShow, animeId}) => {
 
             if(info) setAnime(info.data.Media)
             if(trail) setTrailer(trail)
-
-            
-            console.log(info.data.Media)
         }
 
         if(show===true) getAnime()
@@ -124,6 +124,10 @@ const LibraryModal = ({show, setShow, animeId}) => {
             :
             <img className='animeCover' src={anime.coverImage.extraLarge || ''} />
             }
+            <section className='smashPassCon'>
+              <SmashButton incrementVid={false} animeId={anime.id} />
+              <PassButton incrementVid={false} animeId={anime.id} />
+            </section>
             <p className='animeDesc'>{anime.description.replace(/(<[^>]+>)/g, '')}</p>
             <Tags tags={anime.tags.slice(0,5)} />
             <ExtLinks links={anime.externalLinks} />

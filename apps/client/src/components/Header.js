@@ -1,7 +1,9 @@
 //react components
 import LoginModal from './LoginModal'
 import RegisterModal from './RegisterModal'
+import Searchbar from './Searchbar'
 //npm modules
+import {useEffect} from 'react'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
@@ -30,12 +32,17 @@ const Header = ({title, loggedIn, setLoggedIn}) => {
         else setLoggedIn(false)
     }
 
-    checkUser()
-
-    const navUser = () => {
-        if(loggedIn){
-            return (
-                <Nav>
+    useEffect( () => {
+        checkUser()
+    },[loggedIn])
+    
+    return <header>
+        <Navbar>
+            <Navbar.Brand>{title}</Navbar.Brand>
+            <Nav 
+            style={{display:
+                loggedIn ? 'contents' : 'none'
+                }}>
                     <LinkContainer to="anime"><Nav.Link>Anime</Nav.Link></LinkContainer>
                     <LinkContainer to="library"><Nav.Link>Library</Nav.Link></LinkContainer>
                     <NavDropdown title="Profile" id="basic-nav-dropdown">
@@ -44,20 +51,14 @@ const Header = ({title, loggedIn, setLoggedIn}) => {
                         <NavDropdown.Item onClick={logout}>Log Out</NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
-            )
-        }
-        return (
-            <Nav>
+                <Nav 
+                style={{display:
+                !loggedIn ? 'contents' : 'none'
+                }}>
                 <LoginModal setLoggedIn={setLoggedIn} />
                 <RegisterModal setLoggedIn={setLoggedIn} />
             </Nav>
-        )
-    }
-    
-    return <header>
-        <Navbar>
-            <Navbar.Brand>{title}</Navbar.Brand>
-            {navUser()}
+            <Searchbar />
         </Navbar>
     </header>
 }

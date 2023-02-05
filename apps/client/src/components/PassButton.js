@@ -1,6 +1,6 @@
 const PassButton = ({incrementVid, animeId}) => {
     //user clicks button for anime they do not like
-    //use form submission
+    //set incrementVid to function to choose next anime, or set to false
 
     const disLike = async () => {
         if(!animeId || !(+animeId)) return
@@ -27,7 +27,7 @@ const PassButton = ({incrementVid, animeId}) => {
         e.preventDefault()
 
         disLike()
-        incrementVid()
+        if(typeof incrementVid === 'function') incrementVid()
     }
 
     return (

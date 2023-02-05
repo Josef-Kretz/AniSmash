@@ -1,6 +1,6 @@
 const SmashButton = ({incrementVid, animeId}) => {
     //user presses button for anime they like
-    //use form submission
+    //set incrementVid to function to choose next anime, or set to false
 
     const addLike = async () => {
         if(!animeId || !(+animeId)) return
@@ -30,7 +30,7 @@ const SmashButton = ({incrementVid, animeId}) => {
         e.preventDefault()
 
         addLike()
-        incrementVid()
+        if(typeof incrementVid === 'function') incrementVid()
     }
 
     return (

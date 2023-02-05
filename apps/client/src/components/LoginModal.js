@@ -37,7 +37,7 @@ const LoginModal = ({setLoggedIn}) => {
         else{
             setAlerts({variant: 'success', msgs: data.msgs})
             setLoggedIn(true)
-            //auto close after successful login?
+            setShow(false)
         }
     }
 

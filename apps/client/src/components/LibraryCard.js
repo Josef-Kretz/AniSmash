@@ -38,7 +38,7 @@ const LibraryCard = ({anime}) => {
         }
     }
 
-    return (<Card id={id} className='libraryCard' style={{backgroundColor:'rgba(255,255,255,0.7)'}}>
+    return (<Card key={id||title} id={id} className='libraryCard' style={{backgroundColor:'rgba(255,255,255,0.7)'}}>
         <LibraryModal show={show} setShow={setShow} animeId={id}><iframe src={'library/'+id.toString()} /></LibraryModal>
         <Card.Img variant="top" src={large} onClick={popupAnime}/>
         <Card.Body>
