@@ -94,14 +94,13 @@ const Anime = () => {
                 :
                 <img className='animeCover' src={vids[0].coverImage.extraLarge || ''} />
             }
-        <p className='animeDesc'>{vids[0].description}</p>
-        <Tags tags={vids[0].tags.slice(0,5)} />
-        <ExtLinks links={vids[0].externalLinks} />
         <section className='smashPassCon'>
             <SmashButton incrementVid={incrementVid} animeId={vids[0].id} />
             <PassButton incrementVid={incrementVid} animeId={vids[0].id} />
         </section>
-        
+        <p className='animeDesc'>{vids[0].description}</p>
+        <Tags tags={vids[0].tags.slice(0,5)} />
+        <ExtLinks links={vids[0].externalLinks} />  
     </section>
     }
 

@@ -66,29 +66,6 @@ footer{
     -webkit-text-stroke: 1px white;
 }
 
-/* SMASH/PASS BUTTONS */
-.smashPassCon{
-    position: fixed;
-    top: 30%;
-    right: 0;
-    display: flex;
-    flex-flow: column;
-}
-
-#submitSmash,
-#submitPass{
-height: 40px;
-width: 60px;
-}
-
-#submitSmash{
-    background: rgb(54,160,95);
-}
-
-#submitPass {
-    background: rgb(249,187,255)
-}
-
 /* GENRE CONTAINER */
 .genreCon {
     text-align: center;
@@ -133,11 +110,43 @@ div.carousel-inner{
     padding-bottom: 5%;
 }
 
+/* SMASH/PASS BUTTONS */
+.smashPassCon{
+    display: flex;
+    justify-content: center;
+    flex-flow: row-reverse nowrap;
+    position:sticky;
+    top:0;
+    z-index: 1;
+    gap: 5%;
+}
+
+#submitSmash,
+#submitPass{
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    height: 55px;
+    text-align:center;
+    border: none;
+    border-radius: 50px;
+}
+
+#submitSmash{
+    background-image: linear-gradient(to right, #ed6ea0, #f7186a);
+}
+
+#submitPass {
+    background-image: linear-gradient(to left,  #ed6ea0, #8E37D7);
+}
+
 /* ANIME DESCRIPTION */
 .animeDesc{
-    width: 80%;
-    margin: 0 auto;
-    margin-bottom: 5%;
+    width: fit-content;
+    max-width: 80%;
+    margin: 5% auto;
     background: rgba(255,255,255,0.6)
 }
 
@@ -160,7 +169,7 @@ div.carousel-inner{
 }
 
 .streamIcon {
-    height: 50px;
+    height: 75px;
     width: auto;
 }
 /* ================================================ */
