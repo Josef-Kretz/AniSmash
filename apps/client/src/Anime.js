@@ -97,8 +97,11 @@ const Anime = () => {
         <p className='animeDesc'>{vids[0].description}</p>
         <Tags tags={vids[0].tags.slice(0,5)} />
         <ExtLinks links={vids[0].externalLinks} />
-        <SmashButton incrementVid={incrementVid} animeId={vids[0].id} />
-        <PassButton incrementVid={incrementVid} animeId={vids[0].id} />
+        <section className='smashPassCon'>
+            <SmashButton incrementVid={incrementVid} animeId={vids[0].id} />
+            <PassButton incrementVid={incrementVid} animeId={vids[0].id} />
+        </section>
+        
     </section>
     }
 
