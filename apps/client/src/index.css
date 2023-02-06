@@ -1,14 +1,30 @@
 /* ================================================ */
 /*                  General Styling                 */
 /* ================================================ */
+/* HEADER */
 header{
     background: rgba(255,255,255,0.6);
 }
+.searchButton {
+    background: transparent;
+    border: none
+}
+
+.searchField {
+    background: rgba(210,210,210,0.5);
+    border: none;
+    border-radius: 20px;
+    text-align: center;
+
+}
+
+/* ROOT */
 #root{
     min-height: 100vh;
     position: relative;
     padding-bottom: 60px;
 }
+/* FOOTER */
 footer{
     position:absolute;
     left: 0;
@@ -116,7 +132,7 @@ div.carousel-inner{
     justify-content: center;
     flex-flow: row-reverse nowrap;
     position:sticky;
-    top:0;
+    top:2%;
     z-index: 1;
     gap: 5%;
 }
@@ -174,15 +190,26 @@ div.carousel-inner{
 }
 /* ================================================ */
 /*                  Library                         */
+/*                  Search Card, Container          */
 /* ================================================ */
-.librarySection{
+.librarySection,
+.searchSection{
     overflow-y: auto;
     display: flex;
     flex-flow: wrap row;
+    justify-content: center;
+    gap: 0 5%;
 }
 
-.librarySection > .libraryCard{
+.librarySection > .libraryCard,
+.searchSection > .searchCard{
     width: 250px;
+    margin-top: 3%;
+}
+
+.libraryCard img,
+.searchCard img {
+    cursor: pointer;
 }
 
 .modalFrame {
@@ -190,7 +217,8 @@ div.carousel-inner{
     height: 100%;
 }
 
-.librarySpinner {
+.librarySpinner,
+.searchSpinner {
     margin: auto;
 }
 

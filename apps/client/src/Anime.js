@@ -82,7 +82,7 @@ const Anime = () => {
    if(bigError) throw json(bigError)
 
     if(vids.length){
-        return <section>
+        return <section className='anime'>
             <section className='animeCoverBanner'>
                 <img className='animeBanner' src={vids[0].bannerImage || ''} />
                 <h1>{vids[0].title.english ? vids[0].title.english : vids[0].title.romaji}</h1>

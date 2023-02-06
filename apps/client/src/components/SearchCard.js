@@ -19,7 +19,7 @@ const SearchCard = ({anime}) => {
     
     const handleClick = () => setShow(true)
 
-    return (<Card id={id} className='libraryCard' style={{backgroundColor:'rgba(255,255,255,0.7)'}}>
+    return (<Card id={id} className='searchCard' style={{backgroundColor:'rgba(255,255,255,0.7)'}}>
     <Card.Img variant="top" src={large||''} onClick={handleClick}/>
     <LibraryModal show={show} setShow={setShow} animeId={id}><iframe src={'library/'+id.toString()} /></LibraryModal>
     <Card.Body>
