@@ -128,7 +128,7 @@ const LibraryModal = ({show, setShow, animeId}) => {
               <SmashButton incrementVid={false} animeId={anime.id} />
               <PassButton incrementVid={false} animeId={anime.id} />
             </section>
-            <p className='animeDesc'>{anime.description.replace(/(<[^>]+>)/g, '')}</p>
+            <p className='animeDesc'>{anime.description ? anime.description.replace(/(<[^>]+>)/g, '') : ''}</p>
             <Tags tags={anime.tags.slice(0,5)} />
             <ExtLinks links={anime.externalLinks} />
         </Modal.Body> 

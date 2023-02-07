@@ -1,4 +1,4 @@
-import {useLoaderData, useFetcher, json} from 'react-router-dom'
+import {useLoaderData, json} from 'react-router-dom'
 
 import Genres from '../components/Genres'
 import Tags from '../components/Tags'
@@ -105,6 +105,11 @@ export default function AnimePage() {
     const anime = animeLoader.anime.data.Media
     const trailer = animeLoader.trailer
 
+    let short_desc = ''
+    if(anime.description){
+      short_desc = anime.description.replace(/(<[^>]+>)/g, '')
+    }
+
     return (
         <section>
           <section className='animeCoverBanner'>
@@ -122,7 +127,7 @@ export default function AnimePage() {
             <SmashButton incrementVid={false} animeId={anime.id} />
             <PassButton incrementVid={false} animeId={anime.id} />
         </section>
-        <p className='animeDesc'>{anime.description.replace(/(<[^>]+>)/g, '')}</p>
+        <p className='animeDesc'>{short_desc}</p>
         <Tags tags={anime.tags.slice(0,5)} />
         <ExtLinks links={anime.externalLinks} />
   </section>
