@@ -5,17 +5,21 @@
 header{
     background: rgba(255,255,255,0.6);
 }
+.searchForm{
+    position: relative;
+    display: flex;
+}
 .searchButton {
     background: transparent;
-    border: none
+    border: none;
+    position:absolute;
+    right: 0;
 }
-
 .searchField {
     background: rgba(210,210,210,0.5);
     border: none;
     border-radius: 20px;
-    text-align: center;
-
+    width:100%;
 }
 
 /* ROOT */
