@@ -34,7 +34,7 @@ const SmashButton = ({incrementVid, animeId}) => {
     }
 
     return (
-        <form id='smashButton' onSubmit={onSubmit} className='smashButton button'>
+        <form id='smashForm' onSubmit={onSubmit} className='smashButton button'>
             <input type='submit' id='submitSmash' value='Smash' />
         </form>
     )

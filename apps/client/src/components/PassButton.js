@@ -31,7 +31,7 @@ const PassButton = ({incrementVid, animeId}) => {
     }
 
     return (
-        <form id='passButton' onSubmit={onSubmit} className='passButton button'>
+        <form id='passForm' onSubmit={onSubmit} className='passButton button'>
             <input type='submit' id='submitPass' value='Pass' />
         </form>
     )

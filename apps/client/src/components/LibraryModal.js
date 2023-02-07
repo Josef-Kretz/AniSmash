@@ -108,7 +108,7 @@ const LibraryModal = ({show, setShow, animeId}) => {
     }, [show])
 
     if(anime) return <Modal className='libraryModal' show={show} fullscreen={true}>
-        <Modal.Header>
+        <Modal.Header style={{height:'50px'}}>
           <Button onClick={closeModal}>&#11160;</Button>
           <Modal.Title>AniSmash</Modal.Title>
         </Modal.Header>

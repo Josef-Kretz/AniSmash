@@ -69,6 +69,7 @@ footer{
 .animeCoverBanner {
     margin: 0 auto;
     padding-bottom: 5%;
+    position: relative;
 }
 .animeBanner {
     width: 100%;
@@ -84,6 +85,7 @@ footer{
     font-weight: bold;
     text-align: center;
     -webkit-text-stroke: 1px white;
+    word-break: break-word;
 }
 
 /* GENRE CONTAINER */
@@ -140,10 +142,15 @@ div.carousel-inner{
     z-index: 1;
     gap: 5%;
 }
-
+#smashForm,
+#passForm{
+    width: 100%;
+    text-align: center;
+}
 #submitSmash,
 #submitPass{
-    width: 200px;
+    max-width: 200px;
+    width: 100%;
     font-size: 16px;
     font-weight: 600;
     color: #fff;
@@ -228,12 +235,16 @@ div.carousel-inner{
 
 .libraryModal .animeBanner {
     z-index: 0;
-    max-width: 98%;
+}
+
+.libraryModal .smashPassCon{
+    top: -15px;
 }
 
 .libraryModal h1,
 .libraryModal .genreCon{
     position: relative;
+    word-break: break-word;
 }
 
 /* ================================================ */
@@ -260,11 +271,13 @@ div.carousel-inner{
 
 .profile h1{
     width: fit-content;
+    height: auto;
     margin: 0 auto;
     font-size: 45px;
     font-weight: bold;
     text-align: center;
     -webkit-text-stroke: 1px white;
+    word-break: break-word;
 }
 
 .animeQuote{
