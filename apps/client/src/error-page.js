@@ -9,7 +9,7 @@ export default function ErrorPage() {
       <h1>Oops!</h1>
       <p>Sorry, an unexpected error has occurred.</p>
       <p>{
-        error.internal ? 'Internal error: Seems to be an error on your end'
+        error.status!==500 ? 'Internal error: Seems to be an error on your end'
         : 'External error: Seems to be an error on our Server'
         }</p>
       <p>

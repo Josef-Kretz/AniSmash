@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import { json } from 'react-router-dom'
+import { json, useOutletContext } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 
 import SmashButton from './components/SmashButton'
@@ -18,8 +18,13 @@ const Anime = () => {
     const [nextVid, setNextVid] = useState(false)
     //useEffect swallows catches
     const [bigError, setBigError] = useState()
+    const triggerAlerts = useOutletContext()
 
     const incrementVid = () => setNextVid(!nextVid)
+
+    useEffect(()=>{
+        triggerAlerts({variant: 'primary', msgs: ['hello there']})
+    },[])
 
    useEffect(()=>{
     const grabAnimes = async () => {
@@ -73,7 +78,7 @@ const Anime = () => {
         }catch(err){
             setBigError({msg: err},{statusText: "Can't access Trailer API"})
         }
-        
+
     }
         if(vids[0]) grabTrailer()
 

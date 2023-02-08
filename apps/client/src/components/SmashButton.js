@@ -1,8 +1,13 @@
+import { useOutletContext } from "react-router-dom"
+import {useState, useEffect} from 'react'
+
 const SmashButton = ({incrementVid, animeId}) => {
     //user presses button for anime they like
     //set incrementVid to function to choose next anime, or set to false
+    const triggerAlerts = useOutletContext()
 
     const addLike = async () => {
+        
         if(!animeId || !(+animeId)) return
 
         const options = {
@@ -19,11 +24,10 @@ const SmashButton = ({incrementVid, animeId}) => {
 
             //add error handling and alerts afterward
             console.log(data)
+            triggerAlerts({variant: 'primary', msgs: ['Successfully Liked Anime!']})
         }catch(err){
             console.log(err)
         }
-        
-        
     }
 
     const onSubmit = async (e) => {

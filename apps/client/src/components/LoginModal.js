@@ -45,12 +45,12 @@ const LoginModal = ({setLoggedIn}) => {
         <Button variant='primary' onClick={handleShow}>
             Login
         </Button>
+        <CustomAlert alerts={alerts} setAlerts={setAlerts} />
         <Modal show={show} fullscreen={true} onHide={handleClose}>
             <Modal.Header>
                 <Modal.Title>Login</Modal.Title>
                 <Button onClick={handleClose}>X</Button>
             </Modal.Header>
-            <CustomAlert alerts={alerts} setAlerts={setAlerts} />
             <Modal.Body>
                 <Form onSubmit={onSubmit}>
                     <Form.Group controlId='loginEmail'>
