@@ -314,3 +314,12 @@ div.carousel-inner{
     margin-top: 10%;
 }
 
+/* ================================================ */
+/*                 Responsive CSS                   */
+/* ================================================ */
+
+@media (max-width: 450px) {
+    .navbar-brand {
+        display:none;
+    }
+}

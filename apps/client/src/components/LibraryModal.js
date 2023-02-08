@@ -1,5 +1,6 @@
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import Spinner from 'react-bootstrap/Spinner'
 import {useState, useEffect} from 'react'
 import {json} from 'react-router-dom'
 
@@ -132,6 +133,16 @@ const LibraryModal = ({show, setShow, animeId}) => {
             <Tags tags={anime.tags.slice(0,5)} />
             <ExtLinks links={anime.externalLinks} />
         </Modal.Body> 
+    </Modal>
+
+    return <Modal className='libraryModal' show={show} fullscreen={true}>
+      <Modal.Header style={{height:'50px'}}>
+          <Button onClick={closeModal}>&#11160;</Button>
+          <Modal.Title>AniSmash</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Spinner role='status' variant='info' className='librarySpinner' style={{height:'150px', width:'150px'}} animation='border'><span className='visually-hidden' >Loading...</span></Spinner>
+        </Modal.Body>
     </Modal>
 }
 
