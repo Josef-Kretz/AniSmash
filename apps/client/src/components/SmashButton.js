@@ -4,11 +4,11 @@ import {useState, useEffect} from 'react'
 const SmashButton = ({incrementVid, animeId}) => {
     //user presses button for anime they like
     //set incrementVid to function to choose next anime, or set to false
-    const triggerAlerts = useOutletContext()
+    const triggerAlerts = useOutletContext() //triggerAlerts({variant:'', msgs:['']})
 
     const addLike = async () => {
         
-        if(!animeId || !(+animeId)) return
+        if(!animeId || !(+animeId)) return false
 
         const options = {
             method: "POST",
@@ -22,19 +22,20 @@ const SmashButton = ({incrementVid, animeId}) => {
             const res = await fetch('/like', options)
             const data = await res.json()
 
-            //add error handling and alerts afterward
-            console.log(data)
-            triggerAlerts({variant: 'primary', msgs: ['Successfully Liked Anime!']})
+            if(res.status != 200) throw new Error(`Bad response from server: ${res.status} ${res.statusText}`)
+
+            return true
         }catch(err){
-            console.log(err)
+            triggerAlerts({variant:'warning', msgs:['Error liking this anime:',err]})
+            return false
         }
     }
 
     const onSubmit = async (e) => {
         e.preventDefault()
 
-        addLike()
-        if(typeof incrementVid === 'function') incrementVid()
+        const success = await addLike() //only increment if successful response from server
+        if(success && typeof incrementVid === 'function') incrementVid()
     }
 
     return (

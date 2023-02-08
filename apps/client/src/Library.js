@@ -1,5 +1,5 @@
 import {useState} from 'react'
-import {json, useLoaderData, Link} from 'react-router-dom'
+import {json, useLoaderData, Link, useOutletContext} from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 
 import LibraryCard from './components/LibraryCard'
@@ -21,6 +21,7 @@ const Library = () => {
     const [animeLikes, setAnimeLikes] = useState([...useLoaderData()])
     const [isFetching, setIsFetching] = useInfiniteScroll(loadMoreAnime)
     const [reqsSent, setReqsSent] = useState(1)
+    const triggerAlerts = useOutletContext()
 
     async function loadMoreAnime() {
         try{
@@ -28,6 +29,7 @@ const Library = () => {
             let dbAnime = animeLikes.length+12
             if(reqs > dbAnime) {
                 setIsFetching(false)
+                triggerAlerts({variant:'primary', msgs: ['You reached the end of your library!']})
                 return
             }
 
@@ -43,7 +45,9 @@ const Library = () => {
             setIsFetching(false)
             setReqsSent(reqsSent+1)
         }catch(err){
-            throw json({msg: err},{statusText: "Can't access Library"})
+            setIsFetching(false)
+            triggerAlerts({variant: 'warning', msgs: ['Error accessing library: ', err]})
+            return
         }
         
     }

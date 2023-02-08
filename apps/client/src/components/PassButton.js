@@ -1,7 +1,9 @@
+import { useOutletContext } from "react-router-dom"
+
 const PassButton = ({incrementVid, animeId}) => {
     //user clicks button for anime they do not like
     //set incrementVid to function to choose next anime, or set to false
-
+    const triggerAlerts = useOutletContext() //triggerAlerts({variant:'', msgs:['']})
     const disLike = async () => {
         if(!animeId || !(+animeId)) return
 
@@ -15,19 +17,22 @@ const PassButton = ({incrementVid, animeId}) => {
         try{
             const res = await fetch('/hate', options)
             const data = await res.json()
-            //add error handling and alerts afterward
-            console.log(data)
+
+            if(res.status != 200) throw new Error(`Error ${res.status} ${res.statusText}`)
+
+            return true
         }catch(err){
-            console.log(err)
+            triggerAlerts({variant:'warning', msgs:['Error in disliking this anime: ', err]})
+            return false
         }
         
     }
 
-    const onSubmit = (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault()
 
-        disLike()
-        if(typeof incrementVid === 'function') incrementVid()
+        const success = await disLike() //only increment if successful response from server
+        if(success && typeof incrementVid === 'function') incrementVid()
     }
 
     return (

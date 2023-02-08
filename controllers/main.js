@@ -14,6 +14,7 @@ const main = {
             res.status(200).json({isError: false, msg: 'Successfully updated'})
         }catch(err){
             console.log('err main addLike:', err)
+            res.status(500).json({isError: true, msg:`Server error: Try again later`})
         }
         
     },
@@ -30,6 +31,7 @@ const main = {
             res.status(200).json({isError: false, msg: 'Successfully updated'})
         }catch(err){
             console.log('err main hate:', err)
+            res.status(500).json({isError: true, msg:`Server error: Try again later`})
         }
 
     },
@@ -44,6 +46,7 @@ const main = {
             })
         }catch(err){
             console.log('err main getProfile:', err)
+            res.status(500).json({isError: true, msg:`Server error: Try again later`})
         }
 
     },
@@ -57,6 +60,7 @@ const main = {
             res.status(200).json('Successfully erased Liked Anime')
         }catch(err){
             console.log('err main eraseLikes:', err)
+            res.status(500).json({isError: true, msg:`Server error: Try again later`})
         }
     },
     eraseNotLikes : async (req, res) => {
@@ -66,17 +70,19 @@ const main = {
             user[0].notLikes = []
             user[0].save()
     
-            res.status(200).json('Successfully erase Not Liked Anime')
+            res.status(200).json('Successfully erased Not Liked Anime')
         }catch(err){
             console.log('err main eraseNotLikes:', err)
+            res.status(500).json({isError: true, msg:`Server error: Try again later`})
         }
     },
     deleteUser : async (req, res) => {
         try{
             await User.deleteOne({user : req.user})
-            res.status(200).json('User is deleted')
+            res.status(200).json('User has been deleted')
         }catch(err){
             console.log('err main deleteUser:', err)
+            res.status(500).json({isError: true, msg:`Server error: Try again later`})
         }
 
     }

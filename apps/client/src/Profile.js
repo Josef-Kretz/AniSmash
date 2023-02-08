@@ -1,4 +1,4 @@
-import {useLoaderData, json} from 'react-router-dom'
+import {useLoaderData, json, useOutletContext, useNavigate} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
@@ -14,7 +14,7 @@ export async function loader(){
     }
 }
 
-const handleErase = async (e) => {
+const eraseAPI = async (e, triggerAlerts, navigate) => {
     const buttons = {
         'eraseLikes' : {
             url : 'eraseLikes',
@@ -51,21 +51,22 @@ const handleErase = async (e) => {
         const data = await res.json()
 
         if(res.status != 200){
-            //replace with alert later
-            console.log('request error', res.status, res.statusText)
-            return
+            throw new Error(`Error updating profile: ${res.status}:\n ${res.statusText}`)
         }
         if(button == 'eraseLikes' || button == 'eraseNotLikes') document.getElementById(listBox).value = ''
-        //replace with alert later
-        console.log('success!', data)
+
+        triggerAlerts({variant: 'success', msgs: [data]})
+        if(button == 'deleteUser') navigate('/')
     }catch(err){
-        console.log('error deleting', err) //replace with alert later
+        triggerAlerts({variant: 'warning', msgs: ['Error:', err]})
     }
 
 }
 
 const Profile = () => {
     const userData = useLoaderData()
+    const triggerAlerts = useOutletContext()
+    const navigate = useNavigate()
 
     const [quote, setQuote] = useState()
 
@@ -73,6 +74,8 @@ const Profile = () => {
     const numLikes = userData.likes.length
     const notLikes = userData.notLikes.join('\n')
     const numNotLikes = userData.notLikes.length
+
+    const handleErase = (e) => eraseAPI(e, triggerAlerts, navigate)
 
     useEffect(()=>{
         const randomQuote = async () => {
@@ -83,7 +86,7 @@ const Profile = () => {
                 setQuote(data)
             }catch(err){
                 //don't need to disrupt app if no quote
-                console.log('error fetching quote:', err)
+                triggerAlerts({variant: 'warning', msgs: ["Couldn't load a quote:", err]})
             }
         }
         randomQuote()

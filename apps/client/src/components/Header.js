@@ -4,13 +4,15 @@ import RegisterModal from './RegisterModal'
 import Searchbar from './Searchbar'
 //npm modules
 import {useEffect} from 'react'
+import { useNavigate } from 'react-router-dom'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import {LinkContainer} from 'react-router-bootstrap'
 
 
-const Header = ({title, loggedIn, setLoggedIn}) => {
+const Header = ({title, loggedIn, setLoggedIn, triggerAlerts}) => {
+    const navigate = useNavigate()
 
     const logout = async () => {
         const res = await fetch('/logout', {
@@ -22,6 +24,8 @@ const Header = ({title, loggedIn, setLoggedIn}) => {
 
         const data = await res.json()
         checkUser()
+        triggerAlerts({variant:'success', msgs:['Logged out']})
+        navigate('/')
     }
 
     const checkUser = async () => {
@@ -55,8 +59,8 @@ const Header = ({title, loggedIn, setLoggedIn}) => {
                 style={{display:
                 !loggedIn ? 'contents' : 'none'
                 }}>
-                <LoginModal setLoggedIn={setLoggedIn} />
-                <RegisterModal setLoggedIn={setLoggedIn} />
+                <LoginModal setLoggedIn={setLoggedIn} triggerAlerts={triggerAlerts} />
+                <RegisterModal setLoggedIn={setLoggedIn} triggerAlerts={triggerAlerts} />
             </Nav>
             <Searchbar />
         </Navbar>

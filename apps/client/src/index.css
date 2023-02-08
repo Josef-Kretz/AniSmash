@@ -21,7 +21,15 @@ header{
     border-radius: 20px;
     width:100%;
 }
-
+/* CUSTOM ALERT */
+.alertCon.alert{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    text-align: center;
+}
 /* ROOT */
 #root{
     min-height: 100vh;

@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import { json, useOutletContext } from 'react-router-dom'
+import { useOutletContext } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 
 import SmashButton from './components/SmashButton'
@@ -16,24 +16,18 @@ const Anime = () => {
     const [trailer, setTrailer] = useState([])
     //triggers use effect when nextvid is true
     const [nextVid, setNextVid] = useState(false)
-    //useEffect swallows catches
-    const [bigError, setBigError] = useState()
     const triggerAlerts = useOutletContext()
 
     const incrementVid = () => setNextVid(!nextVid)
-
-    useEffect(()=>{
-        triggerAlerts({variant: 'primary', msgs: ['hello there']})
-    },[])
 
    useEffect(()=>{
     const grabAnimes = async () => {
         try{
             let res = await fetch('/api/trailer')
             let data = await res.json()
-
+            
             if(data.isError || res.status!= 200){
-                setBigError({msg: res.status },{statusText: "Can't access Anime API"})
+                triggerAlerts({variant: 'warning', msgs: [res.status, "Can't access Anime API"]})
                 return
             }
 
@@ -45,7 +39,8 @@ const Anime = () => {
             
             setVids(animelist.slice())
         }catch(err){
-            setBigError({msg: err},{statusText: "Can't access Anime API"})
+            triggerAlerts({variant: 'warning', msgs: ['Error accessing Anime API:', err]})
+            return
         }}
 
         if(vids.length > 1) setVids(vids.slice(1))
@@ -76,15 +71,14 @@ const Anime = () => {
             const trailers = data.data.promo.map(trail => trail.trailer.embed_url)
             setTrailer(trailers)
         }catch(err){
-            setBigError({msg: err},{statusText: "Can't access Trailer API"})
+            triggerAlerts({variant: 'warning', msgs: ['Error accessing Trailer API:', err]})
+            return
         }
 
     }
         if(vids[0]) grabTrailer()
 
    }, [vids[0]])
-
-   if(bigError) throw json(bigError)
 
     if(vids.length){
         return <section className='anime'>

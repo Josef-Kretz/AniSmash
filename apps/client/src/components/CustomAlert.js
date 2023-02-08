@@ -11,16 +11,14 @@ function CustomAlert({alerts, setAlerts, dismissible=true}){
         setShowAlert(false)
         setAlerts({variant: '', msgs: []})
     }
-
-    if(showAlert){
-        return <Alert show={showAlert} variant={alerts.variant} dismissible={dismissible} onClose={handleClose}>
-                <p style={{whiteSpace: 'pre-line'}}>{message}</p>
-            </Alert>
-    }
     
     if(!showAlert && alerts.msgs.length){
         setShowAlert(true)
     }
+
+    return <Alert className='alertCon' show={showAlert} variant={alerts.variant} dismissible={dismissible} onClose={handleClose}>
+                <p style={{whiteSpace: 'pre-line'}}>{message}</p>
+            </Alert>
     
 }
 

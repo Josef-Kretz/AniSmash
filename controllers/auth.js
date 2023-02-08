@@ -11,7 +11,7 @@ exports.postLogin = (req, res, next) => {
     validationErrors.push("Password cannot be blank.");
 
   if (validationErrors.length) {
-    return res.json({isError: true, msgs: validationErrors})
+    return res.status(400).json({isError: true, msgs: validationErrors})
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
@@ -28,7 +28,7 @@ exports.postLogin = (req, res, next) => {
       if (err) {
         return next(err);
       }
-      res.json({isError: false, msgs: ["Success! You are logged in."]})
+      res.status(200).json({isError: false, msgs: ["Success! You are logged in."]})
     });
   })(req, res, next);
 };
@@ -36,7 +36,7 @@ exports.postLogin = (req, res, next) => {
 exports.logout = (req, res, next) => {
   req.logout(function(err) {
     if (err) { return next(err); }
-    res.json({isError: false, msgs: ['Success! You are logged out.']});
+    res.status(200).json({isError: false, msgs: ['Success! You are logged out.']});
   });
   }
 
@@ -51,7 +51,7 @@ exports.postSignup = (req, res, next) => {
 
   if (validationErrors.length) {
     req.flash("errors", validationErrors);
-    return res.json({isError: true, msgs: validationErrors});
+    return res.status(400).json({isError: true, msgs: validationErrors});
   }
   req.body.email = validator.normalizeEmail(req.body.email, {
     gmail_remove_dots: false,
@@ -69,7 +69,7 @@ exports.postSignup = (req, res, next) => {
         return next(err);
       }
       if (existingUser) {
-        return res.json({isError: true, msgs: ["Account with that email address already exists."]});
+        return res.status(400).json({isError: true, msgs: ["Account with that email address already exists."]});
       }
       user.save((err) => {
         if (err) {
@@ -79,7 +79,7 @@ exports.postSignup = (req, res, next) => {
           if (err) {
             return next(err);
           }
-          res.json({isError: false, msgs: ['Successfully registered!']});
+          res.status(200).json({isError: false, msgs: ['Successfully registered!']});
         });
       });
     }

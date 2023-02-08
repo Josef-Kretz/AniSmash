@@ -2,19 +2,14 @@ import React, {useState} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import CustomAlert from './CustomAlert'
 import LinkSaver from './LinkSaver'
 
 
-const LoginModal = ({setLoggedIn}) => {
+const LoginModal = ({setLoggedIn, triggerAlerts}) => {
     const [show, setShow] = useState(false)
-    const [alerts, setAlerts] = useState({variant: '', msgs: []})
 
     const handleClose = () => setShow(false)
-    const handleShow = () => {
-        setAlerts({variant: '', msgs: []})
-        setShow(true)
-    }
+    const handleShow = () =>  setShow(true)
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -32,10 +27,10 @@ const LoginModal = ({setLoggedIn}) => {
         const data = await res.json()
         
         if(data.isError === true){
-            setAlerts({variant: 'warning', msgs : data.msgs})
+            triggerAlerts({variant: 'warning', msgs : data.msgs})
         }
         else{
-            setAlerts({variant: 'success', msgs: data.msgs})
+            triggerAlerts({variant: 'success', msgs: data.msgs})
             setLoggedIn(true)
             setShow(false)
         }
@@ -45,7 +40,6 @@ const LoginModal = ({setLoggedIn}) => {
         <Button variant='primary' onClick={handleShow}>
             Login
         </Button>
-        <CustomAlert alerts={alerts} setAlerts={setAlerts} />
         <Modal show={show} fullscreen={true} onHide={handleClose}>
             <Modal.Header>
                 <Modal.Title>Login</Modal.Title>

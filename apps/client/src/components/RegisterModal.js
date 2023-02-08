@@ -2,19 +2,14 @@ import React, {useState} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import CustomAlert from './CustomAlert'
 import LinkSaver from './LinkSaver'
 
 
-const RegisterModal = ({setLoggedIn}) => {
+const RegisterModal = ({setLoggedIn, triggerAlerts}) => {
     const [show, setShow] = useState(false)
-    const [alerts, setAlerts] = useState({variant: '', msgs: []})
 
     const handleClose = () => setShow(false)
-    const handleShow = () => {
-        setAlerts({variant: '', msgs: []})
-        setShow(true)
-    }
+    const handleShow = () =>  setShow(true)
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -33,12 +28,12 @@ const RegisterModal = ({setLoggedIn}) => {
         const data = await res.json()
         
         if(data.isError === true){
-            setAlerts({variant: 'warning', msgs : data.msgs})
+            triggerAlerts({variant: 'warning', msgs : data.msgs})
         }
         else{
-            setAlerts({variant: 'success', msgs: data.msgs})
+            triggerAlerts({variant: 'success', msgs: data.msgs})
             setLoggedIn(true)
-            //auto close after successful registration?
+            setShow(false)
         }
     }
 
@@ -51,7 +46,6 @@ const RegisterModal = ({setLoggedIn}) => {
                 <Modal.Title>Register</Modal.Title>
                 <Button onClick={handleClose}>X</Button> 
             </Modal.Header>
-            <CustomAlert alerts={alerts} setAlerts={setAlerts} />
             <Modal.Body>
                 <Form onSubmit={onSubmit}>
                     <Form.Group controlId='signupEmail'>
