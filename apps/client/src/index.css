@@ -24,11 +24,11 @@ header{
 /* CUSTOM ALERT */
 .alertCon.alert{
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    top: 2%;
+    left: 50%;
     z-index: 1;
     text-align: center;
+    transform: translateX(-50%);
 }
 /* ROOT */
 #root{
