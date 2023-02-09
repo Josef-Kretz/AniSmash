@@ -14,7 +14,7 @@ export async function loader() {
         let res = await fetch('/api/trailer')
         let data = await res.json()
 
-        if(data.isError || res.status!= 200){
+        if(data.isError || res.status != 200){
             throw new Response('',{status: res.status, statusText: res.statusText})
         }
 

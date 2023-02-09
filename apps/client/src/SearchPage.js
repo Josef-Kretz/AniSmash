@@ -1,10 +1,10 @@
-import {useSearchParams, useOutletContext} from 'react-router-dom'
+import {useSearchParams} from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import Spinner from 'react-bootstrap/Spinner'
 
 import SearchCard from './components/SearchCard'
 
-const getResults = async (search, setAnimes, setIsFetching, triggerAlerts)=>{
+const getResults = async (search, setAnimes, setIsFetching, setBigError)=>{
     const url = 'https://graphql.anilist.co'
     const query = `{
         Page(page: 1, perPage:50)
@@ -49,24 +49,27 @@ const getResults = async (search, setAnimes, setIsFetching, triggerAlerts)=>{
         setIsFetching(false)
     }catch(err){
         setIsFetching(false)
-        //can't throw to route error for some reason
-        triggerAlerts({variant:'warning', msgs:[err.status || 400, err.statusText || err]})
+        //useEffect swallows throws
+        setBigError({status: err.status || 400, statusText: err.statusText || err})
     }
 }
 
 const SearchPage = ({params}) => {
     const [searchParams, setSearchParams] = useSearchParams()
-    const triggerAlerts = useOutletContext()
     const [animes, setAnimes] = useState([])
     const [isFetching, setIsFetching] = useState(false)
+    const [bigError, setBigError] = useState()
+    
 
     useEffect(()=>{
         const search = searchParams.get('q')
         if(search) {
             setIsFetching(true)
-            getResults(search, setAnimes, setIsFetching, triggerAlerts)
+            getResults(search, setAnimes, setIsFetching, setBigError)
         }
     }, [searchParams])
+
+    if(bigError) throw new Response('', bigError) //useEffect swallows throws
     
     if(animes.length) {
         return <section className='searchSection'>
