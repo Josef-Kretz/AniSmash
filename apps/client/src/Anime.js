@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import { useLoaderData, useOutletContext, json } from 'react-router-dom'
+import { useLoaderData, useOutletContext} from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 
 import SmashButton from './components/SmashButton'
