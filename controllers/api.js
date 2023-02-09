@@ -14,6 +14,7 @@ const api = {
             return res.status(200).json(data)
         }catch(err){
             console.log('err api getTrailer:',err)
+            res.status(500).json({isError: true, msg:`Server error: Try again later`})
         }
         
     },
@@ -29,6 +30,7 @@ const api = {
             return res.status(200).json(data)
         }catch(err){
             console.log('err api rec:', err)
+            res.status(500).json({isError: true, msg:`Server error: Try again later`})
         }
         
     },
@@ -42,6 +44,7 @@ const api = {
             return res.status(200).json(data)
         }catch(err){
             console.log('err api trending:', err)
+            res.status(500).json({isError: true, msg:`Server error: Try again later`})
         }
     },
     getLibrary: async (req, res) => {
@@ -63,6 +66,7 @@ const api = {
 
         }catch(err){
             console.log('err api getlibrary:', err)
+            res.status(500).json({isError: true, msg:`Server error: Try again later`})
         }
         
     }

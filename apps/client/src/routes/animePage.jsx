@@ -60,9 +60,11 @@ const url = `https://graphql.anilist.co`
         const data = await res.json()
         data.isError = false  
 
+        if(res.status != 200) throw new Response('', {status: res.status, statusText: res.statusText})
+
         return data
       }catch(err){
-        throw json({msg:err},{statusText:'Error retrieving anime page: Anime API error'})
+        throw new Response('', {status: err.status || 400, statusText: err.statusText || err})
       }
 
 }
@@ -80,7 +82,8 @@ const fetchTrailer = async (idMal) => {
     const trailers = data.data.promo.map(trail => trail.trailer.embed_url)
     return trailers.slice()
 }catch(err){
-  throw json({msg:err},{statusText:'Error retrieving anime page: Trailer API error'})
+  //don't interrupt app if trailer error
+  console.log('Error retrieving trailer:', err)
 }
 }
 
@@ -94,13 +97,12 @@ export async function loader({params})
       return {anime: anime, trailer: trailer}
     }catch(err)
     {
-      throw json({msg:err},{statusText:'Error retrieving anime page'})
+      throw new Response('', {status: err.status || 400, statusText: err.statusText || err})
     }
 }
 
 export default function AnimePage() {
     const animeLoader = useLoaderData()
-    if(animeLoader.isError) throw json({msg:'API error'},{statusText:'Error retrieving anime page'})
 
     const anime = animeLoader.anime.data.Media
     const trailer = animeLoader.trailer

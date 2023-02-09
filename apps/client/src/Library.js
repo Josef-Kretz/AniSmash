@@ -10,9 +10,11 @@ export async function loader(){
         const res = await fetch('/api/getlibrary')
         const data = await res.json()
 
+        if(res.status != 200) throw new Response('',{status: res.status, statusText: res.statusText})
+        
         return data
     }catch(err){
-        throw json({msg: err},{statusText: "Can't access user library"})
+        throw new Response('', {status: err.status || 400, statusText: err.statusText || err})
     }
 
 }

@@ -3,7 +3,7 @@ import { createBrowserRouter } from 'react-router-dom';
 //react components
 import Root from '../routes/root'
 import ErrorPage from '../error-page'
-import Anime from '../Anime'
+import Anime, {loader as vidsLoader} from '../Anime'
 import AnimePage, {loader as animeLoader} from './animePage'
 import Library, {loader as libraryLoader} from '../Library'
 import Profile, {loader as profileLoader} from '../Profile'
@@ -18,7 +18,8 @@ const router = createBrowserRouter([
         {
           path: "anime",
           element: <Anime />,
-          errorElement: <ErrorPage />
+          errorElement: <ErrorPage />,
+          loader: vidsLoader
         },
         {
           path: "library",

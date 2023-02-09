@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import { useOutletContext } from 'react-router-dom'
+import { useLoaderData, useOutletContext, json } from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 
 import SmashButton from './components/SmashButton'
@@ -9,9 +9,30 @@ import Tags from './components/Tags'
 import Genres from './components/Genres'
 import ExtLinks from './components/ExtLinks'
 
+export async function loader() {
+    try{
+        let res = await fetch('/api/trailer')
+        let data = await res.json()
+
+        if(data.isError || res.status!= 200){
+            throw new Response('',{status: res.status, statusText: res.statusText})
+        }
+
+        let animelist = data.data.Page.media
+        animelist = animelist.map( anime => {
+            anime.description = anime.description.replace(/(<[^>]+>)/g, '')
+            return anime
+        })
+        
+        return animelist.slice()
+    }catch(err){
+        throw new Response('', {status: err.status || 400, statusText: err.statusText || err})
+    }
+}
+
 const Anime = () => {
     //stores array of anime info
-    const [vids, setVids] = useState([])
+    const [vids, setVids] = useState(useLoaderData())
     //stores current video trailer link, needs vids then fetches from jikan(MAL)
     const [trailer, setTrailer] = useState([])
     //triggers use effect when nextvid is true
@@ -41,7 +62,8 @@ const Anime = () => {
         }catch(err){
             triggerAlerts({variant: 'warning', msgs: ['Error accessing Anime API:', err]})
             return
-        }}
+        }
+    }
 
         if(vids.length > 1) setVids(vids.slice(1))
         else    grabAnimes()

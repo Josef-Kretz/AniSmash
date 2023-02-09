@@ -1,4 +1,4 @@
-import {useLoaderData, json, useOutletContext, useNavigate} from 'react-router-dom'
+import {useLoaderData, useOutletContext, useNavigate} from 'react-router-dom'
 import {useState, useEffect} from 'react'
 import Spinner from 'react-bootstrap/Spinner'
 import Button from 'react-bootstrap/Button'
@@ -8,9 +8,11 @@ export async function loader(){
         const res = await fetch('/getProfile')
         const data = await res.json()
         
+        if(res.status != 200) throw new Response('',{status:res.status, statusText: res.statusText})
+
         return data
     }catch(err){
-        throw json({msg:err},{statusText:'Could not retrieve user profile'})
+        throw new Response('', {status: err.status || 400, statusText: err.statusText || err})
     }
 }
 
