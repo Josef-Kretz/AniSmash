@@ -37,11 +37,11 @@ const BgClouds = ({limit=100}) => {
                 top: `${Math.floor(Math.random() * (height))}px`,
                 left: `${Math.floor(Math.random() * (width-cloudWidth))}px`,
                 filter: 'brightness(0) saturate(100%) ' + cloudColor
-        }
+            }
 
             cloudArray.push(React.createElement('img',{
                 className: 'cloud',
-                src: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Cartoon_cloud.svg', //host on server afterward
+                src: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Cartoon_cloud.svg',
                 style: cloudStyle
             }))
         }
