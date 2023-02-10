@@ -42,7 +42,7 @@ const Header = ({title, loggedIn, setLoggedIn, triggerAlerts}) => {
     
     return <header>
         <Navbar>
-            <Navbar.Brand>{title}</Navbar.Brand>
+            <Navbar.Brand><img src={require('../assets/result2.svg').default} style={{filter: 'invert(29%) sepia(94%) saturate(3267%) hue-rotate(210deg) brightness(102%) contrast(98%)'}} /></Navbar.Brand>
             <Nav 
             style={{display:
                 loggedIn ? 'contents' : 'none'
