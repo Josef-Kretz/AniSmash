@@ -39,10 +39,11 @@ const Header = ({title, loggedIn, setLoggedIn, triggerAlerts}) => {
     useEffect( () => {
         checkUser()
     },[loggedIn])
-    
+    //changes color of logo svg to blue
+    const colorFilter = 'invert(29%) sepia(94%) saturate(3267%) hue-rotate(210deg) brightness(102%) contrast(98%)'
     return <header>
         <Navbar>
-            <Navbar.Brand><img src={require('../assets/result2.svg').default} style={{filter: 'invert(29%) sepia(94%) saturate(3267%) hue-rotate(210deg) brightness(102%) contrast(98%)'}} /></Navbar.Brand>
+            <Navbar.Brand><img className='navLogo' src={require('../assets/result2.svg').default} style={{filter: colorFilter}} /></Navbar.Brand>
             <Nav 
             style={{display:
                 loggedIn ? 'contents' : 'none'

@@ -5,6 +5,9 @@
 header{
     background: rgba(255,255,255,0.6);
 }
+.navLogo{
+    width:200px;
+}
 .searchForm{
     position: relative;
     display: flex;
@@ -313,6 +316,29 @@ div.carousel-inner{
 #deleteUser {
     margin-top: 10%;
 }
+
+/* ================================================ */
+/*                  Home Page                       */
+/* ================================================ */
+.introCon{
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    background: radial-gradient(white, transparent);
+}
+
+.logoCon{
+    text-align: center;
+    width: 50%;
+    min-width: 300px;
+}
+
+.logoCon img {
+    width: 80%;
+
+}
+
+
 
 /* ================================================ */
 /*                 Responsive CSS                   */

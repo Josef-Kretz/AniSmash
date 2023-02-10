@@ -13,9 +13,7 @@ const Logo = () => {
         filter: 'brightness(0) saturate(100%) ' + cloudColor
     }
 
-    return <div>
-        <img src={require('../assets/animeLogo.svg').default} style={cloudStyle} />
-    </div>
+    return <img src={require('../assets/animeLogo.svg').default} style={cloudStyle} />
 }
 
 export default Logo
