@@ -4,6 +4,7 @@ const HomeDemo = () => {
 
     return <Carousel interval={null}>
         <Carousel.Item>
+            <Carousel.Caption></Carousel.Caption>
             <p>Checkout the trailers of great Anime</p>
             <img src={require('../assets/homepage/trailer.png')} />
         </Carousel.Item>
