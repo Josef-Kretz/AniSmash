@@ -13,7 +13,7 @@ const Logo = () => {
         filter: 'brightness(0) saturate(100%) ' + cloudColor
     }
 
-    return <img src={require('../assets/animeLogo.svg').default} style={cloudStyle} />
+    return <img className='shake' src={require('../assets/animeLogo.svg').default} style={cloudStyle} />
 }
 
 export default Logo

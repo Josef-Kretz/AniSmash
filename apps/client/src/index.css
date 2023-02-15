@@ -324,26 +324,48 @@ footer{
     display: flex;
     justify-content: center;
     flex-flow: row wrap;
-    background: radial-gradient(white, transparent);
+    background: radial-gradient(white, rgba(255,255,255,0.3), transparent);
+    gap: 15px;
 }
 .introCon img {
     text-align: center;
-    width: 50%;
+    width: 40%;
     min-width: 300px;
+}
+.shake{
+    animation: shake 2s;
 }
 .home .carousel{
     min-width: 300px;
-    width: 50%;
+    width: 40%;
     min-height: 300px;
 }
 .home .carousel-inner {
+    display: flex;
+    justify-content: center;
     text-align: center;
+    width: 80%;
+    height:80%;
+    margin: 0 auto;
 }
-.home .carousel-item > *{
+.home .carousel-inner img {
+    width: 100%;
+    min-width: auto;
+}
+div.carousel-item.active{
+    display:flex;
+    flex-flow:column nowrap;
+    justify-content: space-evenly;
+    height: 100%;
+    width: 80%;
+}
+.home .carousel-item{
+    margin: 0;
 }
 .home .carousel p{
     color: black;
-    font-size: 50px;
+    font-size: 1.5rem;
+    line-height: 1.5rem;
 }
 
 
@@ -356,3 +378,13 @@ footer{
         display:none;
     }
 }
+
+/* ================================================ */
+/*                 Animation                        */
+/* ================================================ */
+
+@keyframes shake {
+    0% { transform: translate(-300px, 0px) rotate(-20deg); }
+    80% { transform: translate(50px, 0px) rotate(20deg); }
+    100% { transform: translate(-30px, 0px) rotate(0deg); }
+  }

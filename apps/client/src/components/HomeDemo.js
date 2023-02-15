@@ -4,7 +4,6 @@ const HomeDemo = () => {
 
     return <Carousel interval={null}>
         <Carousel.Item>
-            <Carousel.Caption></Carousel.Caption>
             <p>Checkout the trailers of great Anime</p>
             <img src={require('../assets/homepage/trailer.png')} />
         </Carousel.Item>
@@ -23,12 +22,12 @@ const HomeDemo = () => {
             </p>
         </Carousel.Item>
         <Carousel.Item>
-            <p>Track your Likes in your Library</p>
             <img src={require('../assets/homepage/library.png')} />
+            <p>Track your Likes in your Library</p>
         </Carousel.Item>
         <Carousel.Item>
+            <p>Find where to watch</p>
             <img src={require('../assets/homepage/links.png')} />
-            <p>Find where you can watch it</p>
         </Carousel.Item>
         <Carousel.Item>
             <img src={require('../assets/homepage/search.png')} />
