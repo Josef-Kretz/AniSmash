@@ -8,9 +8,13 @@ header{
 .navLogo{
     width:200px;
 }
+#regButton{
+    margin-left: 1%;
+}
 .searchForm{
     position: relative;
     display: flex;
+    margin-left: 1%;
 }
 .searchButton {
     background: transparent;
@@ -61,6 +65,9 @@ footer{
     content: attr(aria-label)
 }
 
+img::before{
+    display: none;
+}
 /* ================================================ */
 /*                  Background                      */
 /* ================================================ */
@@ -321,19 +328,24 @@ footer{
 /*                  Home Page                       */
 /* ================================================ */
 .introCon{
+    margin: 5% 0;
     display: flex;
     justify-content: center;
     flex-flow: row wrap;
-    background: radial-gradient(white, rgba(255,255,255,0.3), transparent);
     gap: 15px;
+    background: linear-gradient(to bottom, transparent, rgba(255,255,255,1) 50%, transparent);
 }
 .introCon img {
     text-align: center;
     width: 40%;
     min-width: 300px;
 }
+.homeLogo{
+    border-radius: 25%;
+    filter: brightness(0) saturate(100%) invert(29%) sepia(94%) saturate(3267%) hue-rotate(210deg) brightness(102%) contrast(98%);
+}
 .shake{
-    animation: shake 2s;
+    animation: shake 2s ease-out;
 }
 .home .carousel{
     min-width: 300px;
@@ -352,12 +364,15 @@ footer{
     width: 100%;
     min-width: auto;
 }
-div.carousel-item.active{
+.home .carousel-item.active{
     display:flex;
     flex-flow:column nowrap;
     justify-content: space-evenly;
     height: 100%;
     width: 80%;
+}
+.home .active{
+    animation: slow 3s;
 }
 .home .carousel-item{
     margin: 0;
@@ -388,3 +403,9 @@ div.carousel-item.active{
     80% { transform: translate(50px, 0px) rotate(20deg); }
     100% { transform: translate(-30px, 0px) rotate(0deg); }
   }
+
+
+@keyframes slow {
+    0% {opacity: 0}
+    100% {opacity: 1}
+}

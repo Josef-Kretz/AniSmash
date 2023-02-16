@@ -93,6 +93,8 @@ const LibraryModal = ({show, setShow, animeId}) => {
     const [trailer, setTrailer] = useState([])
 
     const closeModal = () => setShow(false)
+    //changes color of logo svg to blue
+    const colorFilter = 'invert(29%) sepia(94%) saturate(3267%) hue-rotate(210deg) brightness(102%) contrast(98%)'
 
     useEffect( () => {
         const getAnime = async () => {
@@ -111,7 +113,7 @@ const LibraryModal = ({show, setShow, animeId}) => {
     if(anime) return <Modal className='libraryModal' show={show} fullscreen={true}>
         <Modal.Header style={{height:'50px'}}>
           <Button onClick={closeModal}>&#11160;</Button>
-          <Modal.Title>AniSmash</Modal.Title>
+          <Modal.Title><img className='navLogo' src={require('../assets/result2.svg').default} style={{filter: colorFilter}} /></Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <section className='animeCoverBanner'>

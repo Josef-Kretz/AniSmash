@@ -20,7 +20,7 @@ export async function loader() {
 
         let animelist = data.data.Page.media
         animelist = animelist.map( anime => {
-            anime.description = anime.description.replace(/(<[^>]+>)/g, '')
+            if(anime.description) anime.description = anime.description.replace(/(<[^>]+>)/g, '')
             return anime
         })
         
@@ -54,7 +54,7 @@ const Anime = () => {
 
             let animelist = data.data.Page.media
             animelist = animelist.map( anime => {
-                anime.description = anime.description.replace(/(<[^>]+>)/g, '')
+                if(anime.description) anime.description = anime.description.replace(/(<[^>]+>)/g, '')
                 return anime
             })
             
@@ -105,7 +105,7 @@ const Anime = () => {
     if(vids.length){
         return <section className='anime'>
             <section className='animeCoverBanner'>
-                <img className='animeBanner' src={vids[0].bannerImage || ''} />
+                <img className='animeBanner' src={vids[0].bannerImage || ''} alt='a banner image of the anime' />
                 <h1>{vids[0].title.english ? vids[0].title.english : vids[0].title.romaji}</h1>
                 <Genres genres={vids[0].genres} />
             </section>
@@ -113,7 +113,7 @@ const Anime = () => {
                 trailer.length ? 
                 <ControlledCarousel trailer={trailer} />
                 :
-                <img className='animeCover' src={vids[0].coverImage.extraLarge || ''} />
+                <img className='animeCover' src={vids[0].coverImage.extraLarge || ''} alt='Cover art of currect anime' />
             }
         <section className='smashPassCon'>
             <SmashButton incrementVid={incrementVid} animeId={vids[0].id} />

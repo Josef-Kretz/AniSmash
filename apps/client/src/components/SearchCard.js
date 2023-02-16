@@ -9,7 +9,7 @@ const SearchCard = ({anime}) => {
     const {id, title:{english, romaji}, coverImage:{large}, description} = anime
     const title = english ? english : romaji
     
-    let short_description
+    let short_description = ''
     if(description){
         //shortens description for card displays
         short_description = (description.length>100 ? description.slice(0,200)+'...' : description)
@@ -20,7 +20,7 @@ const SearchCard = ({anime}) => {
     const handleClick = () => setShow(true)
 
     return (<Card id={id} className='searchCard' style={{backgroundColor:'rgba(255,255,255,0.7)'}}>
-    <Card.Img variant="top" src={large||''} onClick={handleClick}/>
+    <Card.Img variant="top" src={large||''} onClick={handleClick} alt='image of anime' />
     <LibraryModal show={show} setShow={setShow} animeId={id}><iframe src={'library/'+id.toString()} /></LibraryModal>
     <Card.Body>
         <Card.Title>{title||''}</Card.Title>

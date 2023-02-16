@@ -4,14 +4,14 @@ import RegisterModal from './RegisterModal'
 import Searchbar from './Searchbar'
 //npm modules
 import {useEffect} from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import {LinkContainer} from 'react-router-bootstrap'
 
 
-const Header = ({title, loggedIn, setLoggedIn, triggerAlerts}) => {
+const Header = ({loggedIn, setLoggedIn, triggerAlerts}) => {
     const navigate = useNavigate()
 
     const logout = async () => {
@@ -43,7 +43,9 @@ const Header = ({title, loggedIn, setLoggedIn, triggerAlerts}) => {
     const colorFilter = 'invert(29%) sepia(94%) saturate(3267%) hue-rotate(210deg) brightness(102%) contrast(98%)'
     return <header>
         <Navbar>
-            <Navbar.Brand><img className='navLogo' src={require('../assets/result2.svg').default} style={{filter: colorFilter}} /></Navbar.Brand>
+            <Navbar.Brand>
+                <Link to='/'><img className='navLogo' src={require('../assets/result2.svg').default} style={{filter: colorFilter}} /></Link>
+            </Navbar.Brand>
             <Nav 
             style={{display:
                 loggedIn ? 'contents' : 'none'

@@ -2,8 +2,6 @@ import React, {useState} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import LinkSaver from './LinkSaver'
-
 
 const LoginModal = ({setLoggedIn, triggerAlerts}) => {
     const [show, setShow] = useState(false)
@@ -16,7 +14,7 @@ const LoginModal = ({setLoggedIn, triggerAlerts}) => {
         const email = e.target.elements.loginEmail.value
         const pw = e.target.elements.loginPassword.value
 
-        const res = await fetch(LinkSaver.loginLink, {
+        const res = await fetch('/login', {
             method: 'POST',
             headers: {
                 'Content-Type':'application/json'
@@ -37,7 +35,7 @@ const LoginModal = ({setLoggedIn, triggerAlerts}) => {
     }
 
     return ( <>
-        <Button variant='primary' onClick={handleShow}>
+        <Button id='logButton' variant='primary' onClick={handleShow}>
             Login
         </Button>
         <Modal show={show} fullscreen={true} onHide={handleClose}>

@@ -48,7 +48,7 @@ const BgClouds = ({limit=100}) => {
         setClouds(cloudArray)
     }, [width, height])
 
-    return React.createElement('div', {id:'bgClouds'}, ...clouds)
+    return React.createElement('div', {id:'bgClouds', 'aria-hidden':'true'}, ...clouds)
 }
 
 export default BgClouds

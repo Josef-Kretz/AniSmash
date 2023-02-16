@@ -18,7 +18,7 @@ export default function Root(){
 
     return (<>
             <BgClouds limit={100} />
-            <Header title="AniSmash" loggedIn={loggedIn} setLoggedIn={setLoggedIn} triggerAlerts={triggerAlerts} />
+            <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} triggerAlerts={triggerAlerts} />
             <CustomAlert alerts={alerts} setAlerts={setAlerts} />
             <Outlet context={triggerAlerts} />
             <Footer />
