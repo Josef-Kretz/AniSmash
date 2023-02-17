@@ -2,7 +2,7 @@ import Carousel from 'react-bootstrap/Carousel'
 
 const HomeDemo = () => {
 
-    return <Carousel slide={false} controls={false} indicators={false} interval={4000}>
+    return <Carousel slide={false} controls={false} indicators={false} interval={3500}>
         <Carousel.Item>
             <p>Check out the trailers of great Anime</p>
             <img src={require('../assets/homepage/trailer.png')} alt='Example of trailer slidershow' />

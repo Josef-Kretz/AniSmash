@@ -113,7 +113,7 @@ const LibraryModal = ({show, setShow, animeId}) => {
     if(anime) return <Modal className='libraryModal' show={show} fullscreen={true}>
         <Modal.Header style={{height:'50px'}}>
           <Button onClick={closeModal}>&#11160;</Button>
-          <Modal.Title><img className='navLogo' src={require('../assets/result2.svg').default} style={{filter: colorFilter}} /></Modal.Title>
+          <Modal.Title><img className='navLogo' src={require('../assets/modalLogo.svg').default} style={{filter: colorFilter}} /></Modal.Title>
         </Modal.Header>
         <Modal.Body>
             <section className='animeCoverBanner'>

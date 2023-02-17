@@ -44,7 +44,7 @@ const Header = ({loggedIn, setLoggedIn, triggerAlerts}) => {
     return <header>
         <Navbar>
             <Navbar.Brand>
-                <Link to='/'><img className='navLogo' src={require('../assets/result2.svg').default} style={{filter: colorFilter}} /></Link>
+                <Link to='/'><img className='navLogo' src={require('../assets/modalLogo.svg').default} style={{filter: colorFilter}} /></Link>
             </Navbar.Brand>
             <Nav 
             style={{display:

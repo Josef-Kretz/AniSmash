@@ -41,7 +41,7 @@ const BgClouds = ({limit=100}) => {
 
             cloudArray.push(React.createElement('img',{
                 className: 'cloud',
-                src: 'https://upload.wikimedia.org/wikipedia/commons/9/95/Cartoon_cloud.svg',
+                src: require('../assets/cloud.svg').default,
                 style: cloudStyle
             }))
         }
