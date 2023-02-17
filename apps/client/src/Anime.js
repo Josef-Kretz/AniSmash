@@ -82,7 +82,7 @@ const Anime = () => {
 
     const grabTrailer = async () => {
         if(!vids[0].idMal) return
-        console.log(!vids[0].idMal)
+
         try{
             let res = await fetch(`https://api.jikan.moe/v4/anime/${vids[0].idMal}/videos`)
             let data = await res.json()
@@ -111,7 +111,7 @@ const Anime = () => {
     if(vids.length){
         return <section className='anime'>
             <section className='animeCoverBanner'>
-                <img className='animeBanner' src={vids[0].bannerImage || ''} alt='a banner image of the anime' />
+                {vids[0].bannerImage ? <img className='animeBanner' src={vids[0].bannerImage} alt='a banner image of the anime' /> : <></>}
                 <h1>{vids[0].title.english ? vids[0].title.english : vids[0].title.romaji}</h1>
                 <Genres genres={vids[0].genres} />
             </section>

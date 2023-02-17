@@ -221,6 +221,9 @@ img::before{
 /*                  Library                         */
 /*                  Search Card, Container          */
 /* ================================================ */
+.defaultLib{
+    background: rgba(255,255,255,0.6);
+}
 .librarySection,
 .searchSection{
     overflow-y: auto;

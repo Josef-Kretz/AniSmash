@@ -60,7 +60,7 @@ const Library = () => {
         
     }
 
-    if(!animeLikes.length) return <section>There's no error, there's just nothing here. Swipe on some <Link to='../anime' style={{fontWeight:'bold'}}>Animes</Link>!</section>
+    if(!animeLikes.length) return <p className='defaultLib'>There's no error, there's just nothing here. Swipe on some <Link to='../anime' style={{fontWeight:'bold'}}>Animes</Link>!</p>
 
     return <section className='librarySection'>{animeLikes.map(anime => <LibraryCard key={anime.id} anime={anime} />)}
     {

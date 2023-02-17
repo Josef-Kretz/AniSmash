@@ -16,22 +16,22 @@ export async function loader(){
     }
 }
 
-const eraseAPI = async (e, triggerAlerts, navigate) => {
+const eraseAPI = async (e, triggerAlerts, clearBox, navigate) => {
     const buttons = {
         'eraseLikes' : {
             url : 'eraseLikes',
             msg : 'Are you certain about deleting your Liked Anime?',
-            listBox: 'profileLikes'
+            listBox: 'likes'
         },
         'eraseNotLikes' : {
             url : 'eraseNotLikes',
             msg : 'Are you certain about deleting your Not Liked Anime?',
-            listBox: 'profileNotLikes'
+            listBox: 'notLikes'
         },
         'deleteUser' : {
             url : 'deleteUser',
             msg : 'Please confirm you would like to delete your account. This is not reversible',
-            textBox: ''
+            listBox: ''
         }
     }
     const button = e.target.id
@@ -55,7 +55,7 @@ const eraseAPI = async (e, triggerAlerts, navigate) => {
         if(res.status != 200){
             throw new Error(`Error updating profile: ${res.status}:\n ${res.statusText}`)
         }
-        if(button == 'eraseLikes' || button == 'eraseNotLikes') document.getElementById(listBox).value = ''
+        if(listBox) clearBox(listBox)
 
         triggerAlerts({variant: 'success', msgs: [data]})
         if(button == 'deleteUser') navigate('/')
@@ -96,7 +96,15 @@ const Profile = () => {
     const notLikes = userData.notLikes.join('\n')
     const numNotLikes = userData.notLikes.length
 
-    const handleErase = (e) => eraseAPI(e, triggerAlerts, navigate)
+    const clearBox = (listBox) => {
+        let boxes = userData
+        if(listBox){
+            boxes[listBox] = []
+            setUserData(boxes)
+        }
+    }
+
+    const handleErase = (e) => eraseAPI(e, triggerAlerts, clearBox, navigate)
 
      
 

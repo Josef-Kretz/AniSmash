@@ -117,7 +117,7 @@ const LibraryModal = ({show, setShow, animeId}) => {
         </Modal.Header>
         <Modal.Body>
             <section className='animeCoverBanner'>
-                <img className='animeBanner' src={anime.bannerImage || ''} />
+                {anime.bannerImage ? <img className='animeBanner' src={anime.bannerImage} alt='banner image of the anime' /> : <></>}
                 <h1>{anime.title.english ? anime.title.english : anime.title.romaji}</h1>
                 <Genres genres={anime.genres} />
             </section>
