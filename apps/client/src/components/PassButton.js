@@ -3,9 +3,13 @@ import { useOutletContext } from "react-router-dom"
 const PassButton = ({incrementVid, animeId}) => {
     //user clicks button for anime they do not like
     //set incrementVid to function to choose next anime, or set to false
-    const triggerAlerts = useOutletContext() //triggerAlerts({variant:'', msgs:['']})
+    const {triggerAlerts, auth} = useOutletContext() //triggerAlerts({variant:'', msgs:['']})
     const disLike = async () => {
         if(!animeId || !(+animeId)) return
+        if(!auth.loggedIn){
+            triggerAlerts({variant:'warning', msgs: ['Must log in to Pass']})
+            return
+        }
 
         const options = {
             method: "POST",

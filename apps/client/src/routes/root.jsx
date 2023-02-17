@@ -10,6 +10,17 @@ import CustomAlert from '../components/CustomAlert'
 export default function Root(){
     const [loggedIn, setLoggedIn] = useState(false)
     const [alerts, setAlerts] = useState({variant: '', msgs: []})
+
+    const auth = {
+        check: async () => {
+            const res = await fetch('/check')
+            const data = await res.json()
+    
+            if(data) setLoggedIn(true)
+            else setLoggedIn(false)
+        },
+        loggedIn : loggedIn
+    }
     
     const triggerAlerts = (alertObj) => {
         //use {variant: '', msgs: []} structure
@@ -20,7 +31,7 @@ export default function Root(){
             <BgClouds limit={100} />
             <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} triggerAlerts={triggerAlerts} />
             <CustomAlert alerts={alerts} setAlerts={setAlerts} />
-            <Outlet context={triggerAlerts} />
+            <Outlet context={{triggerAlerts, auth}} />
             <Footer />
         </>)
 }

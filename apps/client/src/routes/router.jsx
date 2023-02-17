@@ -9,6 +9,7 @@ import AnimePage, {loader as animeLoader} from './animePage'
 import Library, {loader as libraryLoader} from '../Library'
 import Profile, {loader as profileLoader} from '../Profile'
 import SearchPage from '../SearchPage'
+import Auth from '../components/Auth';
 
 const router = createBrowserRouter([
     {
@@ -24,12 +25,12 @@ const router = createBrowserRouter([
           },
           {
             path: "anime",
-            element: <Anime />,
+            element: <Auth><Anime /></Auth>,
             loader: vidsLoader
           },
           {
             path: "library",
-            element: <Library />,
+            element: <Auth><Library /></Auth>,
             loader: libraryLoader
           },
           {
@@ -39,7 +40,7 @@ const router = createBrowserRouter([
           },
           {
             path:'profile',
-            element: <Profile />,
+            element: <Auth><Profile /></Auth>,
             loader: profileLoader
           },
           {

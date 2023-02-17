@@ -4,11 +4,15 @@ import {useState, useEffect} from 'react'
 const SmashButton = ({incrementVid, animeId}) => {
     //user presses button for anime they like
     //set incrementVid to function to choose next anime, or set to false
-    const triggerAlerts = useOutletContext() //triggerAlerts({variant:'', msgs:['']})
+    const {triggerAlerts, auth} = useOutletContext() //triggerAlerts({variant:'', msgs:['']})
 
     const addLike = async () => {
         
         if(!animeId || !(+animeId)) return false
+        if(!auth.loggedIn){
+            triggerAlerts({variant:'warning', msgs: ['Must log in to Smash']})
+            return
+        }
 
         const options = {
             method: "POST",

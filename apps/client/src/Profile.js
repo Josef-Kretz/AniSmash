@@ -10,9 +10,9 @@ export async function loader(){
         
         if(res.status != 200) throw new Response('',{status:res.status, statusText: res.statusText})
 
-        return data
+        return {data: data, isError: false}
     }catch(err){
-        throw new Response('', {status: err.status || 400, statusText: err.statusText || err})
+        return {data: [err], isError: true}
     }
 }
 
@@ -66,20 +66,17 @@ const eraseAPI = async (e, triggerAlerts, navigate) => {
 }
 
 const Profile = () => {
-    const userData = useLoaderData()
-    const triggerAlerts = useOutletContext()
+    const {data, isError} = useLoaderData()
+    const {triggerAlerts} = useOutletContext()
     const navigate = useNavigate()
-
     const [quote, setQuote] = useState()
-
-    const likes = userData.likes.join('\n')
-    const numLikes = userData.likes.length
-    const notLikes = userData.notLikes.join('\n')
-    const numNotLikes = userData.notLikes.length
-
-    const handleErase = (e) => eraseAPI(e, triggerAlerts, navigate)
+    const [userData, setUserData] = useState({likes: [], notLikes: []})
 
     useEffect(()=>{
+        if(isError) triggerAlerts({variant: 'warning', msgs: data})
+        else setUserData(data)
+
+
         const randomQuote = async () => {
             try{
                 const res = await fetch('https://animechan.vercel.app/api/random')
@@ -92,7 +89,16 @@ const Profile = () => {
             }
         }
         randomQuote()
-    },[])    
+    },[])   
+
+    const likes = userData.likes.join('\n')
+    const numLikes = userData.likes.length
+    const notLikes = userData.notLikes.join('\n')
+    const numNotLikes = userData.notLikes.length
+
+    const handleErase = (e) => eraseAPI(e, triggerAlerts, navigate)
+
+     
 
     if(userData){
         return <section className='profile'>

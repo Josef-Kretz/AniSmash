@@ -24,22 +24,28 @@ export async function loader() {
             return anime
         })
         
-        return animelist.slice()
+        return {data: animelist, isError: false}
     }catch(err){
-        throw new Response('', {status: err.status || 400, statusText: err.statusText || err})
+        return {data: [err], isError: true}
     }
 }
 
 const Anime = () => {
+    const {data, isError} = useLoaderData()
     //stores array of anime info
-    const [vids, setVids] = useState(useLoaderData())
+    const [vids, setVids] = useState([])
     //stores current video trailer link, needs vids then fetches from jikan(MAL)
     const [trailer, setTrailer] = useState([])
     //triggers use effect when nextvid is true
     const [nextVid, setNextVid] = useState(false)
-    const triggerAlerts = useOutletContext()
+    const {triggerAlerts} = useOutletContext()
 
     const incrementVid = () => setNextVid(!nextVid)
+
+    useEffect( () => {
+        if(isError) triggerAlerts({variant: 'warning', msgs: data})
+        else setVids(data)
+    }, [])
 
    useEffect(()=>{
     const grabAnimes = async () => {
@@ -66,7 +72,7 @@ const Anime = () => {
     }
 
         if(vids.length > 1) setVids(vids.slice(1))
-        else    grabAnimes()
+        else    !isError&&grabAnimes()
 
         
     }, [nextVid])
@@ -76,7 +82,7 @@ const Anime = () => {
 
     const grabTrailer = async () => {
         if(!vids[0].idMal) return
-
+        console.log(!vids[0].idMal)
         try{
             let res = await fetch(`https://api.jikan.moe/v4/anime/${vids[0].idMal}/videos`)
             let data = await res.json()

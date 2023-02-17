@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 import {useLoaderData, Link, useOutletContext} from 'react-router-dom'
 import Spinner from 'react-bootstrap/Spinner'
 
@@ -11,19 +11,25 @@ export async function loader(){
         const data = await res.json()
 
         if(res.status != 200) throw new Response('',{status: res.status, statusText: res.statusText})
-        
-        return data
+ 
+        return {data: data, isError: false}
     }catch(err){
-        throw new Response('', {status: err.status || 400, statusText: err.statusText || err})
+        return {data: [err], isError: true}
     }
 
 }
 
 const Library = () => {
-    const [animeLikes, setAnimeLikes] = useState([...useLoaderData()])
+    const {data, isError} = useLoaderData()
+    const [animeLikes, setAnimeLikes] = useState([])
     const [isFetching, setIsFetching] = useInfiniteScroll(loadMoreAnime)
     const [reqsSent, setReqsSent] = useState(1)
-    const triggerAlerts = useOutletContext()
+    const {triggerAlerts} = useOutletContext()
+
+    useEffect( ()=>{
+        if(isError) triggerAlerts({variant: 'warning', msgs: data})
+        else setAnimeLikes([...data])
+    }, [])
 
     async function loadMoreAnime() {
         try{
