@@ -32,6 +32,7 @@ const SmashButton = ({incrementVid, animeId, closeModal}) => {
         }catch(err){
             triggerAlerts({variant:'warning', msgs:['Error liking this anime:',err]})
             if(typeof closeModal === 'function')  closeModal()
+
             return false
         }
     }
@@ -39,9 +40,17 @@ const SmashButton = ({incrementVid, animeId, closeModal}) => {
     const onSubmit = async (e) => {
         e.preventDefault()
 
+        const id = document.getElementById(animeId)
+        const name = id ? id.querySelector('.h5').innerText : ''
+
         const success = await addLike() //only increment if successful response from server
+        //increments video after success for Anime, not library or search
         if(success && typeof incrementVid === 'function') incrementVid()
-        if(typeof closeModal === 'function') closeModal()
+        //in library or search, close modal and send alert
+        if(success && typeof closeModal === 'function') {
+            triggerAlerts({variant:'success', msgs:[`Liked ${name || 'Anime'}`]})
+            closeModal()
+        }
     }
 
     return (

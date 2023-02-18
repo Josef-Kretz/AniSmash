@@ -27,7 +27,7 @@ const PassButton = ({incrementVid, animeId, closeModal}) => {
             return true
         }catch(err){
             triggerAlerts({variant:'warning', msgs:['Error in disliking this anime: ', err]})
-            if(typeof closeModal === 'function') closeModal()
+            if(typeof closeModal === 'function')  closeModal()
             return false
         }
         
@@ -35,10 +35,21 @@ const PassButton = ({incrementVid, animeId, closeModal}) => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
+        
+        const id = document.getElementById(animeId)
+        const name = id ? id.querySelector('.h5').innerText : ''
+
 
         const success = await disLike() //only increment if successful response from server
+        //increments video after success for Anime, not library or search
         if(success && typeof incrementVid === 'function') incrementVid()
-        if(typeof closeModal === 'function')  closeModal()
+        //in library or search, close modal and send alert
+        if(success && typeof closeModal === 'function')  {
+            triggerAlerts({variant: 'success', msgs:[`Disliked ${name || 'Anime'}`]})
+            //checks if page is library, optimistic removal
+            if(document.querySelector('.librarySection')) id.style.display = 'none'
+            closeModal()
+        }
     }
 
     return (
