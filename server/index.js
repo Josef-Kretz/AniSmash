@@ -15,7 +15,7 @@ require('../config/passport')(passport)
 connectDB()
 
 const app = express()
-app.use(express.static('public'))
+app.use(express.static(path.join(path.dirname(__dirname)+'/public/')))
 app.use(express.urlencoded({ extended: true}))
 app.use(express.json())
 
@@ -26,11 +26,9 @@ app.use(
         resave: false,
         saveUninitialized: false,
         store: MongoStore.create(mongoose.connection),
-        //enable before pushing to production
-        // cookie: {
-        //     sameSite: 'none',
-        //     secure: true
-        // }
+        cookie: {
+            sameSite: 'Lax'
+        }
     })
   );
 
