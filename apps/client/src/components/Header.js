@@ -3,7 +3,6 @@ import LoginModal from './LoginModal'
 import RegisterModal from './RegisterModal'
 import Searchbar from './Searchbar'
 //npm modules
-import {useEffect} from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import Nav from 'react-bootstrap/Nav'
 import Navbar from 'react-bootstrap/Navbar'
@@ -11,7 +10,8 @@ import NavDropdown from 'react-bootstrap/NavDropdown'
 import {LinkContainer} from 'react-router-bootstrap'
 
 
-const Header = ({loggedIn, setLoggedIn, triggerAlerts}) => {
+const Header = ({auth, triggerAlerts}) => {
+    const {check, loggedIn, setLoggedIn} = auth
     const navigate = useNavigate()
 
     const logout = async () => {
@@ -23,22 +23,11 @@ const Header = ({loggedIn, setLoggedIn, triggerAlerts}) => {
         })
 
         const data = await res.json()
-        checkUser()
+        check()
         triggerAlerts({variant:'success', msgs:['Logged out']})
         navigate('/')
     }
 
-    const checkUser = async () => {
-        const res = await fetch('/check')
-        const data = await res.json()
-
-        if(data) setLoggedIn(true)
-        else setLoggedIn(false)
-    }
-
-    useEffect( () => {
-        checkUser()
-    },[loggedIn])
     //changes color of logo svg to blue
     const colorFilter = 'invert(29%) sepia(94%) saturate(3267%) hue-rotate(210deg) brightness(102%) contrast(98%)'
     return <header>

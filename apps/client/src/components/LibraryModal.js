@@ -128,8 +128,8 @@ const LibraryModal = ({show, setShow, animeId}) => {
             <img className='animeCover' src={anime.coverImage.extraLarge || ''} />
             }
             <section className='smashPassCon'>
-              <SmashButton incrementVid={false} animeId={anime.id} />
-              <PassButton incrementVid={false} animeId={anime.id} />
+              <SmashButton incrementVid={false} animeId={anime.id} closeModal={closeModal} />
+              <PassButton incrementVid={false} animeId={anime.id} closeModal={closeModal} />
             </section>
             <p className='animeDesc'>{anime.description ? anime.description.replace(/(<[^>]+>)/g, '') : ''}</p>
             <Tags tags={anime.tags.slice(0,5)} />

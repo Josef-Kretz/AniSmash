@@ -1,7 +1,7 @@
 import { useOutletContext } from "react-router-dom"
 import {useState, useEffect} from 'react'
 
-const SmashButton = ({incrementVid, animeId}) => {
+const SmashButton = ({incrementVid, animeId, closeModal}) => {
     //user presses button for anime they like
     //set incrementVid to function to choose next anime, or set to false
     const {triggerAlerts, auth} = useOutletContext() //triggerAlerts({variant:'', msgs:['']})
@@ -31,6 +31,7 @@ const SmashButton = ({incrementVid, animeId}) => {
             return true
         }catch(err){
             triggerAlerts({variant:'warning', msgs:['Error liking this anime:',err]})
+            if(typeof closeModal === 'function')  closeModal()
             return false
         }
     }
@@ -40,6 +41,7 @@ const SmashButton = ({incrementVid, animeId}) => {
 
         const success = await addLike() //only increment if successful response from server
         if(success && typeof incrementVid === 'function') incrementVid()
+        if(typeof closeModal === 'function') closeModal()
     }
 
     return (

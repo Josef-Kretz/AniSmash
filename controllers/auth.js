@@ -50,7 +50,6 @@ exports.postSignup = (req, res, next) => {
     validationErrors.push("Passwords do not match" );
 
   if (validationErrors.length) {
-    req.flash("errors", validationErrors);
     return res.status(400).json({isError: true, msgs: validationErrors});
   }
   req.body.email = validator.normalizeEmail(req.body.email, {

@@ -6,10 +6,15 @@ const Auth = ({children}) => {
     const navigate = useNavigate()
 
     useEffect(()=>{
-        if(auth.loggedIn == false) {
-            triggerAlerts({variant: 'warning', msgs: ['User not logged in']})
-            navigate('/')
+        
+        const checkSession = async () => {
+            const check = await auth.check()
+            if(check == false) {
+                triggerAlerts({variant: 'warning', msgs: ['User not logged in']})
+                navigate('/')
+            }
         }
+        checkSession()
     }, [])
 
     return children

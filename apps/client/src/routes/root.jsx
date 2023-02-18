@@ -1,6 +1,6 @@
 //npm modules
 import {Outlet} from 'react-router-dom'
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 //react components
 import Header from '../components/Header'
 import Footer from '../components/Footer'
@@ -13,13 +13,21 @@ export default function Root(){
 
     const auth = {
         check: async () => {
-            const res = await fetch('/check')
-            const data = await res.json()
-    
-            if(data) setLoggedIn(true)
-            else setLoggedIn(false)
+            try{
+                const res = await fetch('/check')
+                const data = await res.json()
+        
+                if(data) setLoggedIn(true)
+                else setLoggedIn(false)
+
+                return data
+            }catch(err){
+                triggerAlerts({variant:'warning', msgs: ['Error checking user session:',err]})
+            }
+            
         },
-        loggedIn : loggedIn
+        loggedIn : loggedIn,
+        setLoggedIn : setLoggedIn
     }
     
     const triggerAlerts = (alertObj) => {
@@ -27,9 +35,13 @@ export default function Root(){
         setAlerts(alertObj)
     }
 
+    useEffect(()=>{
+        auth.check()
+    },[])
+
     return (<>
             <BgClouds limit={100} />
-            <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} triggerAlerts={triggerAlerts} />
+            <Header auth={auth} triggerAlerts={triggerAlerts} />
             <CustomAlert alerts={alerts} setAlerts={setAlerts} />
             <Outlet context={{triggerAlerts, auth}} />
             <Footer />
