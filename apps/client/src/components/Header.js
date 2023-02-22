@@ -4,10 +4,7 @@ import RegisterModal from './RegisterModal'
 import Searchbar from './Searchbar'
 //npm modules
 import { useNavigate, Link } from 'react-router-dom'
-import Nav from 'react-bootstrap/Nav'
-import Navbar from 'react-bootstrap/Navbar'
-import NavDropdown from 'react-bootstrap/NavDropdown'
-import {LinkContainer} from 'react-router-bootstrap'
+import {Nav, Navbar, NavDropdown} from 'react-bootstrap'
 
 
 const Header = ({auth, triggerAlerts}) => {
@@ -33,16 +30,16 @@ const Header = ({auth, triggerAlerts}) => {
     return <header>
         <Navbar>
             <Navbar.Brand>
-                <Link to='/'><img className='navLogo' src={require('../assets/modalLogo.svg').default} style={{filter: colorFilter}} /></Link>
+                <Link to='/'><img className='navLogo' src={require('../assets/modalLogo.svg').default} style={{filter: colorFilter}} alt='logo'/></Link>
             </Navbar.Brand>
             <Nav 
             style={{display:
                 loggedIn ? 'contents' : 'none'
                 }}>
-                    <LinkContainer to="anime"><Nav.Link>Anime</Nav.Link></LinkContainer>
-                    <LinkContainer to="library"><Nav.Link>Library</Nav.Link></LinkContainer>
+                    <Nav.Link as={Link} to='anime'>Anime</Nav.Link>
+                    <Nav.Link as={Link} to='library'>Library</Nav.Link>
                     <NavDropdown title="Profile" id="basic-nav-dropdown">
-                        <LinkContainer to="profile"><NavDropdown.Item href="">Profile</NavDropdown.Item></LinkContainer>
+                        <NavDropdown.Item as={Link} to='profile'>Profile</NavDropdown.Item>
                         <NavDropdown.Divider />
                         <NavDropdown.Item onClick={logout}>Log Out</NavDropdown.Item>
                     </NavDropdown>
